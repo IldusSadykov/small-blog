@@ -11,10 +11,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20100713113845) do
+ActiveRecord::Schema.define(version: 20150326062040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
+
+  create_table "categories", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
+    t.text     "message"
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["post_id"], name: "index_comments_on_post_id", using: :btree
+
+  create_table "posts", id: :uuid, default: "uuid_generate_v1()", force: true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.integer  "category_id"
+    t.integer  "user_id"
+    t.boolean  "published",   default: false, null: false
+    t.integer  "updated_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
