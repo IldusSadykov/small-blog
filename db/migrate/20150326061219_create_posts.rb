@@ -10,8 +10,11 @@ class CreatePosts < ActiveRecord::Migration
       t.belongs_to :user, index: true, type: 'uuid'
       t.boolean :published, default: false, null: false
       t.integer :updated_by
+      t.string :slug
 
       t.timestamps
     end
+
+    add_index :posts, :slug, unique: true
   end
 end

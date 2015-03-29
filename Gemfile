@@ -41,6 +41,7 @@ gem "responders"
 gem "rollbar"
 gem "seedbank"
 gem "stackprof"
+gem "friendly_id", "~> 5.1.0"
 
 group :staging, :production do
   gem "newrelic_rpm"

@@ -164,6 +164,8 @@ GEM
     foundation-rails (5.5.2.1)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     fuubar (2.0.0.rc1)
       rspec (~> 3.0.rc1)
       ruby-progressbar (~> 1.4)
@@ -423,6 +425,7 @@ DEPENDENCIES
   formulaic
   foundation-icons-sass-rails
   foundation-rails
+  friendly_id (~> 5.1.0)
   fuubar (~> 2.0.0.rc1)
   google-analytics-rails
   health_check
