@@ -1,0 +1,24 @@
+.row
+  .large-12.columns
+    h1
+      ' Blog
+      small This is my blog. It's awesome.
+    hr/
+
+.row
+  .large-12.columns
+    h3
+      = link_to 'Add new post', new_post_path
+
+.row
+  .large-9.columns role="content"
+    - posts_presenter.each do |post|
+      article
+        = render 'posts/post', post: post
+  aside.large-3.columns
+    h5 Categories
+    ul.side-nav
+      - categories.each do |category|
+        li
+          = link_to category.name, category_path(category)
+

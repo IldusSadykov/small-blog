@@ -1,0 +1,4 @@
+.row
+  .large-9.columns role="content"
+    - posts_presenter.each do |post|
+      = render 'posts/post', post: post

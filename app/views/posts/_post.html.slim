@@ -1,0 +1,12 @@
+= div_for post
+  article
+    h3
+      = link_to post.title, post_path(post)
+    h6
+      | Written by
+      a(href="#") = post.author
+      = post.created_at
+    .row
+      .large-6.columns
+        p #{post.body}
+  hr/
