@@ -1,0 +1,17 @@
+.row
+  .large-12.columns
+    h1 Post Show
+.row
+  .large-12.columns
+    = post_presenter.title
+.row
+  .large-12.columns
+    = post_presenter.body
+.row
+  .large-12.columns
+    = post_presenter.author
+  .large-12.columns
+    = post_presenter.created_at
+= render 'buttons', post: post_presenter
+.row
+  = render 'comments/list', post: post_presenter
