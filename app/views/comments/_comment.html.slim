@@ -1,9 +1,14 @@
 .row
   .large-12.columns
-    span.message = comment.message
     h5
+      span.message = comment.message
+    p
+      ' Author:
+      '
       = comment.author
     '
-    p = comment.created_at
-    hr
+    p
+      ' posted in:
+      '
+      = comment.created_at
     = render 'buttons', comment: comment.object

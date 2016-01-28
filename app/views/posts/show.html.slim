@@ -1,16 +1,7 @@
 .row.current-post(id="#{post_presenter.id}")
   .large-12.columns
     h1 Post Show
-.row
-  .large-12.columns
-    h3 = post_presenter.title
-.row
-  .large-12.columns
-    = post_presenter.body
-.row
-  .large-12.columns
-    strong = post_presenter.author
-    p = post_presenter.created_at
+  = render 'post', post: post_presenter
 .row
   .large-12.columns
     = render 'buttons', post: post_presenter.object
