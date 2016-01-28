@@ -1,0 +1,7 @@
+.row
+  .large-12.columns
+    span.message = message
+    h5
+      = author
+    p = created_at
+    hr

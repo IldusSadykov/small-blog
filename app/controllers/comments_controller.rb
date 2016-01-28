@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
 
   def create
     comment.save
-    render json: comment
+    render root: false, json: CommentSerializer.new(comment).serializable_hash
   end
 
   private
