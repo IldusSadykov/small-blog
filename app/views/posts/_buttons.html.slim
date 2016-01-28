@@ -1,1 +1,2 @@
-= link_to t('app.button.edit'), edit_post_path(post), class: 'button edit-button'
+- if policy(post.object).edit?
+  = link_to t('app.button.edit'), edit_post_path(post), class: 'button edit-button'

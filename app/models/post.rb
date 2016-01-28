@@ -3,4 +3,10 @@ class Post < ActiveRecord::Base
 
   belongs_to :user
   has_many :comments
+  belongs_to :category
+  has_many :comments, dependent: :destroy
+
+  def published?
+    published
+  end
 end
