@@ -3,6 +3,14 @@ class CommentsController < ApplicationController
   expose(:comment, attributes: :comment_params)
   expose(:comments, ancestor: :post)
 
+  respond_to :html
+  respond_to :json, only: :create
+
+  def create
+    comment.save
+    render json: comment
+  end
+
   private
 
   def comment_params

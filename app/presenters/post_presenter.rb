@@ -4,6 +4,6 @@ class PostPresenter < BasePresenter
   end
 
   def all_comments
-    CommentPresenter.wrap(@object.comments.order('created_at desc'))
+    CommentPresenter.wrap(@object.comments.includes(:user).order('created_at desc'))
   end
 end
