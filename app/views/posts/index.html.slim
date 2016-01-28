@@ -12,8 +12,9 @@
 .row
   .large-9.columns role="content"
     - posts_presenter.each do |post|
-      = render post
-      = render 'buttons', post: post
+      - if policy(post.object).read?
+        = render post
+        = render 'buttons', post: post.object
       hr/
   aside.large-3.columns
     h5 Categories

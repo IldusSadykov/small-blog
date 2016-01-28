@@ -1,0 +1,4 @@
+- if policy(comment).edit?
+  = link_to t('app.button.edit'), edit_post_comment_path(comment), class: 'button edit-button'
+- if policy(comment).delete?
+  = link_to t('app.button.edit'), post_comment_path(comment), class: 'button edit-button'

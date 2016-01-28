@@ -13,6 +13,6 @@
     p = post_presenter.created_at
 .row
   .large-12.columns
-    = render 'buttons', post: post_presenter
+    = render 'buttons', post: post_presenter.object
 .row
   = render 'comments/list', post: post_presenter
