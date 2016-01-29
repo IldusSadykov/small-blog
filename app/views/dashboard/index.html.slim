@@ -11,10 +11,10 @@
 
 #content.row
   .medium-8.columns
-    - posts_presenter.each do |post|
-      - if policy(post.object).read?
+    - posts.each do |post|
+      - if policy(post).read?
         = render 'posts/post', post: post
-        = render 'posts/buttons', post: post.object
+        = render 'posts/buttons', post: post
   aside.large-3.columns
     h5 Categories
     ul.side-nav

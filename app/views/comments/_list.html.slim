@@ -1,9 +1,9 @@
 .comments-form
-  h3 = t('app.comment.comments')
+  h3 Comments
   .input-group.comment-add
-    button.radius href="#" = t('app.comment.new_comment')
+    button.radius(href="#") New comment
   .comment-area
-    = render 'comments/form', post: post, comment: post.comments.build
+    = render 'comments/form', post: post, comment: post.build_comment
 
 .comments-list
-  = render post.all_comments
+  = render post.comments

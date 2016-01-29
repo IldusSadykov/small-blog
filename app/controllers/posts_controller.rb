@@ -2,22 +2,23 @@ class PostsController < ApplicationController
   respond_to :html
   respond_to :js, only: :update
 
-  expose(:post, attributes: :post_params)
-  expose(:user_posts) { current_user.posts }
-
-  expose(:post_presenter) { PostPresenter.wrap(post) }
-  expose(:posts_presenter) { PostPresenter.wrap(user_posts) }
+  expose_decorated(:post, attributes: :post_params)
+  expose_decorated(:posts) { current_user.posts }
 
   expose(:categories) { Category.all }
 
   before_action :authorize_user?, only: %i(update, destroy)
 
+  def new
+    respond_with post
+  end
+
   def index
-    respond_with posts_presenter
+    respond_with posts
   end
 
   def show
-    respond_with post_presenter
+    respond_with post
   end
 
   def create

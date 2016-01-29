@@ -1,10 +1,10 @@
 class DashboardController < ApplicationController
   respond_to :html
 
-  expose(:posts_presenter) { PostPresenter.wrap(Post.includes(:user).last(10)) }
+  expose_decorated(:posts, collection: true) { Post.includes(:user).last(10) }
   expose(:categories) { Category.all }
 
   def index
-    respond_with posts_presenter, categories
+    respond_with posts, categories
   end
 end
