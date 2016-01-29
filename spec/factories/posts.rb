@@ -5,6 +5,11 @@ FactoryGirl.define do
     title "MyString"
     body "MyText"
     user nil
+    association :category, factory: :category
     published false
+  end
+
+  trait :published do
+    published true
   end
 end

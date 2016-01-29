@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   respond_to :html
 
-  expose_decorated(:posts, collection: true) { Post.includes(:user).last(10) }
+  expose_decorated(:posts, collection: true)
   expose(:categories) { Category.all }
 
   def index

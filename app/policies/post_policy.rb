@@ -1,8 +1,4 @@
 class PostPolicy < ApplicationPolicy
-  def read?
-    record.published?
-  end
-
   def edit?
     owner?
   end
