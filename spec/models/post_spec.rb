@@ -1,5 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
-RSpec.describe Post, :type => :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Post do
+  it { is_expected.to validate_presence_of :title }
+  it { is_expected.to validate_presence_of :body }
+  it { is_expected.to validate_presence_of :category }
+  it { is_expected.to validate_presence_of :user }
+  it { is_expected.to have_many :comments }
+  it { is_expected.to belong_to :user }
+  it { is_expected.to belong_to :category }
 end

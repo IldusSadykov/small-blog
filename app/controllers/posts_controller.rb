@@ -26,6 +26,10 @@ class PostsController < ApplicationController
     respond_with post
   end
 
+  def edit
+    respond_with post
+  end
+
   def update
     post.save
     respond_with post

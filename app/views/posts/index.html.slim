@@ -6,6 +6,5 @@
 #content.row
   .large-12.columns
     - posts.each do |post|
-      - if policy(post).read?
-        = render post
-        = render 'buttons', post: post
+      = render post
+      = render 'buttons', post: post
