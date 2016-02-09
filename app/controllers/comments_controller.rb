@@ -8,7 +8,11 @@ class CommentsController < ApplicationController
 
   def create
     comment.save
-    render root: false, json: CommentSerializer.new(comment).serializable_hash
+    if comment.save
+      render root: false, json: CommentSerializer.new(comment).serializable_hash, status: :ok
+    else
+      render root: false, json: comment.errors, status: :unprocessable_entity
+    end
   end
 
   private

@@ -9,6 +9,6 @@ class ApplicationPolicy
   private
 
   def owner?
-    object.user == user
+    record.user == user
   end
 end

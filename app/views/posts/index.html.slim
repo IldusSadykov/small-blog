@@ -5,7 +5,5 @@
 
 #content.row
   .large-12.columns
-    - posts_presenter.each do |post|
-      - if policy(post.object).read?
-        = render post
-        = render 'buttons', post: post.object
+    - posts.each do |post|
+      = render post

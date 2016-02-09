@@ -12,4 +12,6 @@
 #= require_tree ../templates
 #= require_tree .
 
-$(document).foundation()
+$ ->
+  $(document).foundation()
+  window.Comments = new Comments

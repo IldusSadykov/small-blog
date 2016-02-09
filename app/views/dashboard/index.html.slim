@@ -1,20 +1,13 @@
-.callout.large.primary
-  .row.column.text-center
-    h1
-      ' Blog
-      small This is my blog. It's awesome.
-
 .row
   .medium-8.columns
     h3
       = link_to 'Add new post', new_post_path
 
-#content.row
-  .medium-8.columns
-    - posts_presenter.each do |post|
-      - if policy(post.object).read?
+.row
+  .large-9.columns(role='content')
+    - posts.each do |post|
+      - if policy(post).read?
         = render 'posts/post', post: post
-        = render 'posts/buttons', post: post.object
   aside.large-3.columns
     h5 Categories
     ul.side-nav

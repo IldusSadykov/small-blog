@@ -1,10 +1,6 @@
-# Rails Base
+# Welcome to my Small Blog app
 
-[![Build Status](https://semaphoreapp.com/api/v1/projects/31b68af8b073708a56e4e005bbcba2af4802816d/76140/shields_badge.png)](https://semaphoreapp.com/fs/rails-base)
-[![Test Coverage](https://codeclimate.com/github/fs/rails-base/badges/coverage.svg)](https://codeclimate.com/github/fs/rails-base)
-[![Code Climate](https://codeclimate.com/github/fs/rails-base.png)](https://codeclimate.com/github/fs/rails-base)
-
-Rails Base is the base Rails application template used at Flatstack.
+Small blog is based on [Rails Base](https://github.com/fs/rails-base) application template by Flatstack.
 It's based on Rails 4 and Ruby 2.2.3.
 
 ## Application Gems
@@ -73,91 +69,3 @@ It's based on Rails 4 and Ruby 2.2.3.
 * `bin/quality` - runs rubocop, brakeman, rails_best_practices and bundle-audit for the app
 * `bin/ci` - should be used in the CI or locally
 * `bin/server` - to run server locally
-
-## Getting Started
-
-### Prepare dependencies
-
-Some gems have native extensions.
-You should have GCC installed on your development machine.
-
-* `qt` - to run specs with [Capybara Webkit](https://github.com/thoughtbot/capybara-webkit)
-* `phantomjs198` - to run Javascript unit tests
-* `graphviz` - to generate Entity-Relationship Diagram
-
-Setup required dependencies from `Brewfile`:
-```bash
-brew tap Homebrew/bundle
-brew bundle
-```
-
-### Bootstrap application
-
-1. Clone application as new project with original repository named "rails-base". We use depth parameter here in order not to copy the history of changes in base project
-
-   ```bash
-   git clone --depth 1 git://github.com/fs/rails-base.git --origin rails-base [MY-NEW-PROJECT]
-   ```
-
-2. Create your new repo on GitHub and push master into it. Make sure master branch is tracking origin repo.
-
-  ```bash
-  git remote add origin git@github.com:[MY-GITHUB-ACCOUNT]/[MY-NEW-PROJECT].git
-  git push -u origin master
-  ```
-
-3. Run setup script
-
-  ```bash
-  bin/setup
-  ```
-
-4. Run test and quality suits to make sure all dependencies are satisfied and applications works correctly before making changes.
-
-  ```bash
-  bin/ci
-  ```
-
-5. Run app
-
-  ```bash
-  bin/server
-  ```
-
-6. Update README
-
-  Do not forget to update application `README.md` file with detailed information based on the
-  existing template.
-
-  ```bash
-  mv doc/README_TEMPLATE.md README.md
-  # update README.md
-  git commit -am "Update README.md"
-  ```
-
-## Deployment
-
-### Heroku
-
-Out of the box Rails Base ready to be deployed to [Heroku.com](http://heroku.com).
-
-* [Heroku Postgres](https://www.heroku.com/postgres) add-on will be used for database.
-* [SendGrid](https://devcenter.heroku.com/articles/sendgrid#ruby-rails) add-on required to be able to send emails.
-* [NewRelic](https://devcenter.heroku.com/articles/newrelic#ruby-installation-and-configuration) add-on could be used to monitor application performance.
-* [Rollbar](https://elements.heroku.com/addons/rollbar) add-on could be used to application errors.
-
-```bash
-heroku create --addons=heroku-postgresql,sendgrid,newrelic,rollbar --remote staging rails-base-example
-heroku config:add HOST="rails-base-example.herokuapp.com" MAILER_SENDER_ADDRESS="noreply@rails-base-example.herokuapp.com" NEW_RELIC_APP_NAME="Rails Base"
-git push staging master
-heroku run rake db:schema:load
-heroku open
-```
-
-## Credits
-
-Rails Base is maintained by [Timur Vafin](http://github.com/timurvafin).
-It was written by [Flatstack](http://www.flatstack.com) with the help of our
-[contributors](http://github.com/fs/rails-base/contributors).
-
-[<img src="http://www.flatstack.com/logo.svg" width="100"/>](http://www.flatstack.com)

@@ -1,9 +1,9 @@
-.row.current-post(id="#{post_presenter.id}")
+.row.current-post(id="#{post.id}")
   .large-12.columns
     h1 Post Show
-  = render 'post', post: post_presenter
+  = render post
 .row
   .large-12.columns
-    = render 'buttons', post: post_presenter.object
+    = render 'buttons', post: post
 .row
-  = render 'comments/list', post: post_presenter
+  = render 'comments/list', post: post

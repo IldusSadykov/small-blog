@@ -1,0 +1,8 @@
+= simple_form_for post.object do |f|
+  .form-inputs
+    = f.input :title
+    = f.input :body
+    = f.input :published
+    = f.association :category
+  .form-actions
+    = f.button :submit

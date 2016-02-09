@@ -1,6 +1,6 @@
 class PostPolicy < ApplicationPolicy
   def read?
-    object.published?
+    record.published?
   end
 
   def edit?
@@ -8,7 +8,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    edit? && (not object.published?)
+    edit? && (not record.published?)
   end
 
   def delete?
