@@ -5,6 +5,7 @@ class DashboardController < ApplicationController
   expose(:categories) { Category.all }
 
   def index
+    self.posts = posts.includes(:user)
     respond_with posts, categories
   end
 end

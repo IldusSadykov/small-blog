@@ -1,4 +1,5 @@
-ul.left
-  - if user_signed_in?
-    = active_link_to "Dashboard", root_path, active: :exclusive, wrap_tag: :li
-    = active_link_to "My posts", posts_path, wrap_tag: :li
+- if user_signed_in?
+  li
+    = active_link_to "Dashboard", root_path, active: :exclusive, class: "button"
+  li
+    = active_link_to "My posts", posts_path, class: "button"

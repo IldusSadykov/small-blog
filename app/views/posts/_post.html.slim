@@ -1,12 +1,17 @@
-= div_for post.object, class: 'blog-post'
-  h3
-    = link_to post.title, post_path(post)
-    '
-    small = post.created_at
-  p #{post.body}
-  .callout
-    ul.menu.simple
-      li
-        ' Author:
-        = link_to post.author, '#'
-      li = post.created_at
+article
+  = div_for post.object, class: 'blog-post'
+    h3
+      = link_to post.title, post_path(post)
+      '
+      small = post.created_at
+    h6
+      ' Written by
+      '
+      = link_to post.author, '#'
+      ' on
+      '
+      = post.created_at
+
+    p #{post.body}
+  = render 'posts/buttons', post: post
+hr

@@ -5,6 +5,7 @@ class CategoriesController < ApplicationController
   respond_to :html
 
   def show
+    self.posts = posts.includes(:user)
     respond_with posts
   end
 end
