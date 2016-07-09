@@ -43,6 +43,7 @@ gem "seedbank"
 gem "stackprof"
 gem "friendly_id", "~> 5.1.0"
 gem "active_model_serializers"
+gem "geocoder"
 
 group :staging, :production do
   gem "newrelic_rpm"
