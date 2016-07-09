@@ -12,9 +12,8 @@
 #content.row
   .medium-8.columns
     - posts.each do |post|
-      - if policy(post).read?
-        = render 'posts/post', post: post
-        = render 'posts/buttons', post: post
+      = render 'posts/post', post: post
+      = render 'posts/buttons', post: post
   aside.large-3.columns
     h5 Categories
     ul.side-nav
