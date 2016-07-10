@@ -4,7 +4,10 @@ class User < ActiveRecord::Base
 
   validates :full_name, presence: true
 
+  belongs_to :location
   has_many :posts
+
+  accepts_nested_attributes_for :location
 
   def to_s
     full_name

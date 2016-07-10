@@ -19,6 +19,11 @@
             required: false
         = f.input :current_password,
             required: true
+        = f.fields_for :location, f.object.location || f.object.build_location do |ff|
+          = ff.input :street
+          = ff.input :city
+          = ff.input :state
+          = ff.select :country_id, Country.all.collect {|f| [f.name, f.id] }
 
       .form-actions
         = f.button :submit, "Update"
