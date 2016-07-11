@@ -15,3 +15,4 @@
 $ ->
   $(document).foundation()
   window.Comments = new Comments
+  window.Dashboard = new Dashboard
