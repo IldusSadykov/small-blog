@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710094541) do
+ActiveRecord::Schema.define(version: 20160711204835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 20160710094541) do
     t.string   "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.float    "account_balance"
+    t.datetime "created"
+    t.string   "currency"
+    t.string   "description"
+    t.string   "email"
+    t.string   "livemode"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -82,6 +94,25 @@ ActiveRecord::Schema.define(version: 20160710094541) do
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree
   add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "subscriptions", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.boolean  "cancel_at_period_end"
+    t.datetime "canceled_at"
+    t.datetime "created"
+    t.datetime "current_period_end"
+    t.datetime "current_period_start"
+    t.uuid     "customer_id"
+    t.datetime "ended_at"
+    t.boolean  "livemode"
+    t.integer  "quantity"
+    t.datetime "start"
+    t.string   "status"
+    t.datetime "trial_end"
+    t.datetime "trial_start"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
   create_table "users", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
