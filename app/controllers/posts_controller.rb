@@ -50,7 +50,8 @@ class PostsController < ApplicationController
         :body,
         :picture,
         :published,
-        :category_id
+        :category_id,
+        :plan_id
       ).merge(user: current_user)
   end
 

@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :posts, only: :index, module: :users
   end
   resources :categories, only: :show
+  resources :plans
   root to: 'dashboard#index'
 end

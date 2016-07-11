@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   belongs_to :location
   has_many :posts
+  has_many :plans
 
   accepts_nested_attributes_for :location
 

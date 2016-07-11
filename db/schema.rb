@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711204835) do
+ActiveRecord::Schema.define(version: 20160711232501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,22 @@ ActiveRecord::Schema.define(version: 20160711204835) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "plans", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.string   "name"
+    t.integer  "amount"
+    t.datetime "created"
+    t.string   "currency"
+    t.string   "interval"
+    t.integer  "interval_count"
+    t.boolean  "livemode"
+    t.text     "statement_descriptor"
+    t.integer  "trial_period_days"
+    t.uuid     "user_id"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "posts", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
@@ -89,6 +105,7 @@ ActiveRecord::Schema.define(version: 20160711204835) do
     t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.uuid     "plan_id"
   end
 
   add_index "posts", ["category_id"], name: "index_posts_on_category_id", using: :btree

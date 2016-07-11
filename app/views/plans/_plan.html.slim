@@ -1,0 +1,8 @@
+= div_for plan.object, class: 'blog-plan'
+  h3
+    = link_to plan.name, plan_path(plan)
+    '
+    small = plan.created_at
+  .callout
+    ul.menu.simple
+      li = plan.created_at
