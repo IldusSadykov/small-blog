@@ -7,7 +7,8 @@ class PostsController < ApplicationController
 
   expose(:categories) { Category.all }
 
-  before_action :authorize_user?, only: %i(update, destroy)
+  before_action :authorize_user?, only: %i(update destroy)
+  before_action :check_user_subscription, except: :index
 
   def new
     respond_with post
@@ -58,5 +59,9 @@ class PostsController < ApplicationController
 
   def authorize_user?
     fail NotAuthorizedError unless AccessPolicy.new(post, current_user).can_manage?
+  end
+
+  def check_user_subscription
+    fail NotAuthorizedError unless current_user.subscriptions.map(&:plan).include?(post.plan)
   end
 end

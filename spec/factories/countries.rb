@@ -1,7 +1,6 @@
 FactoryGirl.define do
   factory :country do
     name "MyString"
-code "MyString"
+    code "MyString"
   end
-
 end

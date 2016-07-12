@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   belongs_to :customer
   has_many :posts
   has_many :plans
+  has_many :subscriptions, through: :customer
 
   accepts_nested_attributes_for :location
 

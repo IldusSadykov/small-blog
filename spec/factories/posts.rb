@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :post do
     title "MyString"
     body "MyText"
-    user nil
+    association :user, factory: :user
     association :category, factory: :category
     published false
   end

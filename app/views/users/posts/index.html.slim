@@ -6,6 +6,7 @@
         = form_for(Subscription.new, url: subscriptions_path, method: "POST") do |f|
           = f.text_field :user_id, type: :hidden, value: current_user.id
           = f.text_field :plan_id, type: :hidden, value: post.plan.id
+          = f.text_field :post_id, type: :hidden, value: post.id
           script.stripe-button(
             src = "https://checkout.stripe.com/checkout.js"
             data = { amount: "#{post.plan.amount}",
