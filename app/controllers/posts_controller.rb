@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   expose(:categories) { Category.all }
 
   before_action :authorize_user?, only: %i(update destroy)
-  before_action :check_user_subscription, except: :index
+  before_action :check_user_subscription, except: %i(new create index update)
 
   def new
     respond_with post
