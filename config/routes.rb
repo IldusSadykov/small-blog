@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   end
   resources :categories, only: :show
   resources :plans
+  resources :subscriptions
   root to: 'dashboard#index'
 end

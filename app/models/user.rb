@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
   validates :full_name, presence: true
 
   belongs_to :location
+  belongs_to :customer
   has_many :posts
   has_many :plans
 

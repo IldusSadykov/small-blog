@@ -4,7 +4,7 @@ class Users::PostsController < ApplicationController
 
   expose(:user)
   expose_decorated(:post, attributes: :post_params)
-  expose_decorated(:posts, ancestor: :user) { current_user.posts }
+  expose_decorated(:posts, ancestor: :user)
 
   expose(:categories) { Category.all }
 

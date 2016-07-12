@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   respond_to :js, only: :update
 
   expose_decorated(:post, attributes: :post_params)
-  expose_decorated(:posts) { current_user.posts }
+  expose_decorated(:posts)
 
   expose(:categories) { Category.all }
 
@@ -14,6 +14,7 @@ class PostsController < ApplicationController
   end
 
   def index
+    self.posts = current_user.posts
     respond_with posts
   end
 
