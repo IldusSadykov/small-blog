@@ -6,10 +6,18 @@ class UserDecorator < ApplicationDecorator
   end
 
   def lat
-    object.location.lat
+    if object.location
+      object.location.lat
+    else
+      Location::DEFAULT_LOCATION[:lat]
+    end
   end
 
   def lng
-    object.location.lon
+    if object.location
+      object.location.lon
+    else
+      Location::DEFAULT_LOCATION[:lng]
+    end
   end
 end

@@ -32,27 +32,4 @@ describe PostPolicy do
       it { is_expected.not_to be_permitted }
     end
   end
-
-  describe '#read?' do
-    subject { described_class.new(current_user, post).read? }
-    context 'some post without published status' do
-      let(:post) { build :post, published: false }
-      it { is_expected.not_to be_permitted }
-    end
-
-    context 'some post with published status' do
-      let(:post) { build :post, published: true }
-      it { is_expected.to be_permitted }
-    end
-
-    context 'current_user post without published status' do
-      let(:post) { build :post, published: false, user: current_user }
-      it { is_expected.not_to be_permitted }
-    end
-
-    context 'current_user post with published status' do
-      let(:post) { build :post, published: true, user: current_user }
-      it { is_expected.to be_permitted }
-    end
-  end
 end

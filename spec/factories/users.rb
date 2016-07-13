@@ -5,6 +5,7 @@ FactoryGirl.define do
     password "123456"
     password_confirmation { password }
     confirmed_at 1.hour.ago
+    association :location, factory: :location
   end
 
   trait :not_confirmed do

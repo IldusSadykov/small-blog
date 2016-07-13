@@ -18,14 +18,14 @@ feature "Create comment to existing post", js: true do
   end
 
   scenario "I should see New comment button" do
-    within(".comments_form") do
+    within(".comments-form") do
       expect(page).to have_content("Comments")
-      expect(page).to have_content("New Comment")
+      expect(page).to have_content("New comment")
     end
   end
 
   scenario "I can create valid comment" do
-    click_button "New Comment"
+    click_button "New comment"
 
     fill_form("Test message")
 
