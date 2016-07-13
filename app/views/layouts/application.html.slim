@@ -14,6 +14,8 @@ html class="no-js" lang="en"
 
     = javascript_include_tag "vendor/modernizr"
 
+    script(src="http://maps.google.com/maps/api/js?sensor=false&key=#{ENV["GOOGLE_MAP_KEY"]}")
+
     = javascript_tag "window.App = {}"
     == analytics_init if GA.tracker
 
@@ -29,26 +31,7 @@ html class="no-js" lang="en"
     javascript:
       App.currentUserData = #{{current_user.to_json}};
       window.authors_coordinates = #{{authors_coordinates ? authors_coordinates.to_json : []}};
-      var map;
-      var myLatLng = {
-        lat: #{{current_user ? current_user.lat : request.location.latitude}},
-        lng: #{{current_user ? current_user.lng : request.location.longitude}}
-      }
-
-      var mapOptions = {
-        zoom: 14,
-        center: myLatLng
-      }
-      function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), mapOptions);
-        var marker = new google.maps.Marker({
-          position: myLatLng,
-          map: map,
-          title: 'Hello World!'
-        });
-      }
-
+      window.userLat = #{{current_user ? current_user.lat : request.location.latitude}};
+      window.userLng = #{{current_user ? current_user.lng : request.location.longitude}};
 
     = javascript_include_tag :application
-
-    script(async=true defer=true src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXaF3o8CSjn-iDfLeRMP5Ynl86DRXdBS8&callback=initMap")
