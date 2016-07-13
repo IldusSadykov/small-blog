@@ -1,6 +1,6 @@
 users = FactoryGirl.create_list(:user, 10)
 categories = %w(News Code Design Fun Weasels).reduce([]) do |categories, title|
-  categories << FactoryGirl.create(:category)
+  categories << FactoryGirl.create(:category, name: title)
 end
 100.times do
   post = FactoryGirl.create(:post, user: users.sample, category: categories.sample)

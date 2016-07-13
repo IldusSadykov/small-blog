@@ -7,7 +7,6 @@ class PostsController < ApplicationController
 
   expose(:categories) { Category.all }
 
-  before_action :authorize_user?, only: %i(update destroy)
   before_action :check_user_subscription, except: %i(new create index update)
 
   def new
@@ -33,11 +32,13 @@ class PostsController < ApplicationController
   end
 
   def update
+    authorize post, :edit?
     post.save
     respond_with post
   end
 
   def destroy
+    authorize post, :edit?
     post.destroy
     redirect_to posts_path
   end
@@ -57,11 +58,7 @@ class PostsController < ApplicationController
       ).merge(user: current_user)
   end
 
-  def authorize_user?
-    fail NotAuthorizedError unless AccessPolicy.new(post, current_user).can_manage?
-  end
-
   def check_user_subscription
-    fail NotAuthorizedError unless current_user.subscriptions.map(&:plan).include?(post.plan)
+    authorize post, :subscribed_by_user
   end
 end
