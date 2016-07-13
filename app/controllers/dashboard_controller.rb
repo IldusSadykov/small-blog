@@ -1,7 +1,7 @@
 class DashboardController < ApplicationController
   respond_to :html
 
-  expose_decorated(:posts, collection: true) { Post.all.includes(:user, :plan).limit(10) }
+  expose_decorated(:posts, collection: true) { Post.all_cached }
   expose(:categories) { Category.all }
 
   def index
