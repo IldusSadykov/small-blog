@@ -11,10 +11,10 @@ class ApplicationController < ActionController::Base
     locations =  Location.joins(:users).near('Kazan', 10).select("users.full_name as user_name, users.id as user_id")
     locations.reduce([]) do |address, location|
       address.push({
-        lat: location.lat,
-        lng: location.lon,
+        user_lat: location.lat,
+        user_lng: location.lon,
         user_name: location.user_name,
-        user_posts: user_posts_path(location.user_id)
+        user_id: location.user_id
       })
     end
   end

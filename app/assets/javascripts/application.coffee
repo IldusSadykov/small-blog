@@ -6,6 +6,7 @@
 #
 #= require jquery
 #= require jquery_ujs
+#= require jquery-ui
 #= require foundation
 #= require current_user
 #= require skim
@@ -24,11 +25,6 @@ $ ->
 
   if $('#map').length > 0
     window.map = new (google.maps.Map)(document.getElementById('map'), mapOptions)
-
-    marker = new (google.maps.Marker)(
-      position: myLatLng
-      map: map
-    )
 
     window.Dashboard = new Dashboard
 
