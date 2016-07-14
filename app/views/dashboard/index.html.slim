@@ -5,11 +5,16 @@
       small This is my blog. It's awesome.
 
 .row
-  .medium-8.columns
-    input.search_users
+  .large-4.columns
+    .row.collapse
+      .large-9.columns
+        input.search_users placeholder="search" type="search" /
+      .large-3.columns
+        span.postfix
+          i.fi-magnifying-glass
 
 #content.row
-  .medium-8.columns
+  #posts-list.medium-8.columns
     - posts.each do |post|
       = render 'posts/post', post: post
       = render 'posts/buttons', post: post

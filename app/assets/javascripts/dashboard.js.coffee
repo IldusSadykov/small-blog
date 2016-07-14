@@ -6,6 +6,24 @@ class @Dashboard
     @bindEvents()
     @showAuthorsInMap(@locations)
 
+  ui: ->
+    postsList: $("#posts-list")
+
+  _postTemplate: (post) ->
+    "<div class='post blog-post' id='#{post.id}'> \
+       <h3> \
+       <a href='/posts/#{post.id}'>#{post.title}</a> \
+         <small>#{post.created_at}</small> \
+       </h3> \
+       <p>#{post.body}</p>
+       <div class='callout'> \
+         <ul class='menu simple'> \
+           <li>Author: <a href='#'>#{post.user_name}</a></li> \
+           <li>#{post.created_at}</li>\
+         </ul> \
+       </div> \
+     </div>"
+
   bindEvents: ->
     $(".search_users").on "keyup", (event) =>
       target = event.currentTarget
@@ -16,8 +34,10 @@ class @Dashboard
           query: $(target).val()
         success: (data) =>
           @clearMarkers()
-          $.each data, (index, post) =>
-            @showAuthorsInMap(post)
+          @ui().postsList.html('')
+          $.each data.posts, (index, post) =>
+            @renderPost(post)
+            @showMarker(post)
 
   showAuthorsInMap: (locations) ->
     $.each locations, (index, location) =>
@@ -51,3 +71,6 @@ class @Dashboard
 
   clearMarkers: ->
     @setMapOnAll null
+
+  renderPost: (post) =>
+    @ui().postsList.append(@_postTemplate(post))
