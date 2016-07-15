@@ -30,7 +30,7 @@ html class="no-js" lang="en"
 
     javascript:
       App.currentUserData = #{{current_user.to_json}};
-      window.authors_coordinates = #{{authors_coordinates ? authors_coordinates.to_json : []}};
+      window.authors_coordinates = #{{authors_coordinates.to_json}};
       window.userLat = #{{current_user ? current_user.lat : request.location.latitude}};
       window.userLng = #{{current_user ? current_user.lng : request.location.longitude}};
 

@@ -25,6 +25,18 @@ $ ->
   if $('#map').length > 0
     window.map = new (google.maps.Map)(document.getElementById('map'), mapOptions)
 
+    unless window.currentUserData
+      if navigator.geolocation
+        navigator.geolocation.getCurrentPosition (position) ->
+          pos =
+            lat: position.coords.latitude
+            lng: position.coords.longitude
+          marker = new (google.maps.Marker)(
+            position: pos
+          )
+          map.setCenter(pos)
+          marker.setMap(map)
+
     window.Dashboard = new Dashboard
 
   window.Comments = new Comments

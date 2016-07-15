@@ -7,17 +7,7 @@ class ApplicationController < ActionController::Base
   responders :flash
   respond_to :html
 
-  expose(:authors_coordinates) do
-    locations =  Location.joins(:users).near('Kazan', 10).select("users.full_name as user_name, users.id as user_id")
-    locations.reduce([]) do |address, location|
-      address.push({
-        user_lat: location.lat,
-        user_lng: location.lon,
-        user_name: location.user_name,
-        user_id: location.user_id
-      })
-    end
-  end
+  expose(:authors_coordinates) { AuthorsCoordinatesFetch.call(user: current_user).coordinates }
 
   decent_configuration do
     strategy DecentExposure::StrongParametersStrategy
