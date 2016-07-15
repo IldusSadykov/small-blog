@@ -4,9 +4,9 @@ class @Dashboard
   markers: []
 
   constructor: ->
-    @locations = window.authors_coordinates
+    @authores_with_locations = window.authors_coordinates
     @bindEvents()
-    @showAuthorsInMap(@locations)
+    @showAuthorsInMap(@authores_with_locations)
 
   ui: ->
     postsList: $("#posts-list")
@@ -28,26 +28,26 @@ class @Dashboard
           @ui().postsList.html('')
           $.each data.posts, (index, post) =>
             @renderPost(post)
-            @showMarker(post)
+            @showMarker(post.user_with_location)
 
-  showAuthorsInMap: (locations) ->
-    $.each locations, (index, location) =>
-      @showMarker(location)
+  showAuthorsInMap: (users_with_locations) ->
+    $.each users_with_locations, (index, uwl) =>
+      @showMarker(uwl)
 
-  showMarker: (location) ->
-    latLng = { lat: location.user_lat, lng: location.user_lng }
+  showMarker: (user) ->
+    latLng = { lat: user.location.lat, lng: user.location.lng }
     marker = new (google.maps.Marker)(
       position: latLng
       title: 'Hello World!')
     marker.setMap(map)
     @markers.push(marker)
-    @showContent(marker, location)
+    @showContent(marker, user)
 
-  showContent: (marker, location) ->
+  showContent: (marker, user) ->
     contentString =
       '<div id="content">' + '<div id="siteNotice">' + '</div>' +
-      '<h3 id="firstHeading" class="firstHeading">Author ' + location.user_name + '</h3>' +
-      '<div id="bodyContent">' + '<p>' + location.user_name + ' <a href="/users/' + location.user_id + '/posts" target="_blank">posts</a></p>' + '</div>' +
+      '<h3 id="firstHeading" class="firstHeading">Author ' + user.name + '</h3>' +
+      '<div id="bodyContent">' + '<p>' + user.name + ' <a href="/users/' + user.id + '/posts" target="_blank">posts</a></p>' + '</div>' +
       '</div>'
     infowindow = new (google.maps.InfoWindow)(content: contentString)
     marker.addListener 'click', ->

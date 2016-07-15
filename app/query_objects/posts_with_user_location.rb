@@ -1,4 +1,4 @@
-class PostsWithLocation
+class PostsWithUserLocation
   attr_reader :query
 
   def initialize(query)

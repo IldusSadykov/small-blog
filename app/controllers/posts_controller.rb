@@ -14,7 +14,7 @@ class PostsController < ApplicationController
 
   def index
     if params[:query]
-      self.posts = PostsWithLocation.new(params[:query]).all
+      self.posts = PostsWithUserLocation.new(params[:query]).all
     end
     respond_with posts
   end
