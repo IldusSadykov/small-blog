@@ -1,4 +1,6 @@
 class @Dashboard
+  POSTS_URL = "/posts"
+
   markers: []
 
   constructor: ->
@@ -28,7 +30,8 @@ class @Dashboard
     $(".search_users").on "keyup", (event) =>
       target = event.currentTarget
       promise = $.ajax
-        url: "/posts"
+        url: POSTS_URL
+        method: "GET"
         dataType: "json"
         data:
           query: $(target).val()
