@@ -1,6 +1,5 @@
 class Users::PostsController < ApplicationController
   respond_to :html
-  respond_to :js, only: :update
 
   expose(:user)
   expose_decorated(:post, attributes: :post_params)

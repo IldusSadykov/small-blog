@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   respond_to :html, :json
-  respond_to :js, only: :update
 
   expose_decorated(:post, attributes: :post_params)
   expose_decorated(:posts)
@@ -14,9 +13,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    self.posts = current_user.posts
     if params[:query]
-      self.posts = Post.with_user_location(params[:query])
+      self.posts = PostsWithLocation.new(params[:query]).all
     end
     respond_with posts
   end

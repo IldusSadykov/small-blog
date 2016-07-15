@@ -1,0 +1,12 @@
+.post.blog-post(id='#{@post.id}')
+  h3
+    a(href='/posts/#{@post.id}') = @post.title
+    '
+    small = @post.created_at
+  p = @post.body
+  .callout
+    ul.menu.simple
+      li
+        ' Author:
+        a(href='#') = @post.user_name
+      li = @post.created_at

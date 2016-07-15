@@ -4,6 +4,6 @@
     = f.input :body
     = f.input :published
     = f.association :category
-    = f.select :plan_id, options_for_select(current_user.plans.collect {|plan| [plan.name, plan.id]})
+    = f.select :plan_id, options_for_select(current_user.plans_list)
   .form-actions
     = f.button :submit

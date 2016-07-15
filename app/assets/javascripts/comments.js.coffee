@@ -11,16 +11,7 @@ class @Comments
     commentsList: $('.comments-list')
 
   _commentTemplate: (options) ->
-    #JST["comments/item"](options)
-    { message, author, created_at } = options
-    "<div class='row'> \
-      <div class='large-12 columns'> \
-        <span class='message'>#{message}</span> \
-        <h5>#{author}</h5> \
-        <p>#{created_at}</p> \
-        <hr>\
-      </div>\
-     </div>"
+    JST["comment_item"](options)
 
   bindEvents: ->
     @ui.commentAdd.on 'click', (event) =>

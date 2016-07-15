@@ -11,20 +11,8 @@ class @Dashboard
   ui: ->
     postsList: $("#posts-list")
 
-  _postTemplate: (post) ->
-    "<div class='post blog-post' id='#{post.id}'> \
-       <h3> \
-       <a href='/posts/#{post.id}'>#{post.title}</a> \
-         <small>#{post.created_at}</small> \
-       </h3> \
-       <p>#{post.body}</p>
-       <div class='callout'> \
-         <ul class='menu simple'> \
-           <li>Author: <a href='#'>#{post.user_name}</a></li> \
-           <li>#{post.created_at}</li>\
-         </ul> \
-       </div> \
-     </div>"
+  _postTemplate: (options) ->
+    JST["post_item"](options)
 
   bindEvents: ->
     $(".search_users").on "keyup", (event) =>
@@ -76,4 +64,4 @@ class @Dashboard
     @setMapOnAll null
 
   renderPost: (post) =>
-    @ui().postsList.append(@_postTemplate(post))
+    @ui().postsList.append(@_postTemplate(post: post))

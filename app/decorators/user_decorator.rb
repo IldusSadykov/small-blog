@@ -20,4 +20,10 @@ class UserDecorator < ApplicationDecorator
       Location::DEFAULT_LOCATION[:lng]
     end
   end
+
+  def plans_list
+    object.plans.collect do |plan|
+      [plan.name, plan.id]
+    end
+  end
 end
