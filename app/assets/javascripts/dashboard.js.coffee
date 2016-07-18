@@ -4,9 +4,9 @@ class @Dashboard
   markers: []
 
   constructor: ->
-    @authores_with_locations = window.authors_coordinates
+    @authors_with_locations = window.authors_with_locations
     @bindEvents()
-    @showAuthorsInMap(@authores_with_locations)
+    @showAuthorsInMap(@authors_with_locations)
 
   ui: ->
     postsList: $("#posts-list")

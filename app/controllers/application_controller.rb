@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   responders :flash
   respond_to :html
 
-  expose(:authors_coordinates) { AuthorsWithCoordinatesFetch.call(user: current_user).coordinates }
+  expose(:authors_with_locations) { AuthorsWithCoordinatesFetch.call(user: current_user, current_location: request.location).users }
 
   decent_configuration do
     strategy DecentExposure::StrongParametersStrategy

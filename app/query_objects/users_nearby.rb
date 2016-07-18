@@ -1,14 +1,14 @@
 class UsersNearby
-  attr_reader :user
+  attr_reader :location
 
-  def initialize(user)
-    @user = user
+  def initialize(location)
+    @location = location
   end
 
   def all
-    return Location.none if user.blank?
-    Location.joins(:users)
-      .near(user.city, 10)
+    return Location.none if location.blank?
+    Location.joins(:user)
+      .near([location.latitude, location.longitude], 10)
       .select("users.full_name as user_name, users.id as user_id")
   end
 end

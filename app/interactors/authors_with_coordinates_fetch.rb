@@ -1,10 +1,10 @@
 class AuthorsWithCoordinatesFetch
   include Interactor
 
-  delegate :user, to: :context
+  delegate :user, :current_location, to: :context
 
   def call
-    context.coordinates = users_with_locations.map do |uwl|
+    context.users = users_with_locations.map do |uwl|
       user_params(uwl)
     end
   end
@@ -12,7 +12,8 @@ class AuthorsWithCoordinatesFetch
   private
 
   def users_with_locations
-    UsersNearby.new(user).all
+    location = coordinates_present?(current_location) ? current_location : user.location
+    UsersNearby.new(location).all
   end
 
   def user_params(entity)
@@ -24,5 +25,9 @@ class AuthorsWithCoordinatesFetch
         lng: entity.lon,
       }
     }
+  end
+
+  def coordinates_present?(location)
+    location.latitude.to_i > 0 && location.longitude.to_i > 0
   end
 end

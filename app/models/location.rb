@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  has_many :users
+  has_one :user
   belongs_to :country
 
   DEFAULT_LOCATION = {
@@ -8,6 +8,9 @@ class Location < ActiveRecord::Base
   }
 
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.street_changed? }
+
+  alias_attribute :latitude, :lat
+  alias_attribute :longitude, :lon
 
   geocoded_by :address, latitude: :lat, longitude: :lon
 
