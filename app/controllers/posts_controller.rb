@@ -14,9 +14,9 @@ class PostsController < ApplicationController
 
   def index
     if params[:query]
-      self.posts = PostsWithUserLocation.new(params[:query]).all
+      self.posts = PostsWithQuery.new(params[:query]).all
     end
-    respond_with posts
+    respond_with posts, each_serializer: PostSerializer
   end
 
   def show

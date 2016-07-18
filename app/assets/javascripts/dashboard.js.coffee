@@ -28,14 +28,14 @@ class @Dashboard
           @ui().postsList.html('')
           $.each data.posts, (index, post) =>
             @renderPost(post)
-            @showMarker(post.user_with_location)
+            @showMarker(post.author)
 
   showAuthorsInMap: (users_with_locations) ->
     $.each users_with_locations, (index, uwl) =>
       @showMarker(uwl)
 
   showMarker: (user) ->
-    latLng = { lat: user.location.lat, lng: user.location.lng }
+    latLng = { lat: user.location.latitude, lng: user.location.longitude }
     marker = new (google.maps.Marker)(
       position: latLng
       title: 'Hello World!')

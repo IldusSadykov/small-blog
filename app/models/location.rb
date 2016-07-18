@@ -7,6 +7,8 @@ class Location < ActiveRecord::Base
     lng: 49.06608060000001
   }
 
+  DEFAULT_DISTANCE = 10
+
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.street_changed? }
 
   alias_attribute :latitude, :lat

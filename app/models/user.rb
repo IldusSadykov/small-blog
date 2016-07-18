@@ -12,8 +12,6 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :location
 
-  delegate :city, :lat, :lon, to: :location, allow_nil: true
-
   def to_s
     full_name
   end

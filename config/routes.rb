@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   resources :categories, only: :show
   resources :plans
   resources :subscriptions
-  root to: 'dashboard#index'
+  resource :dashboard, controller: "dashboard", only: :show
+  root to: 'dashboard#show'
 end

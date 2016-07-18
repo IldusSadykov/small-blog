@@ -22,7 +22,7 @@ class UserDecorator < ApplicationDecorator
   end
 
   def plans_list
-    object.plans.collect do |plan|
+    object.plans.map do |plan|
       [plan.name, plan.id]
     end
   end
