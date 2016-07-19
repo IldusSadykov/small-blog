@@ -1,5 +1,5 @@
 class LocationNearby
-  attr_reader :location
+  attr_reader :location, :distance
 
   def initialize(location, distance)
     @location = location

@@ -30,7 +30,17 @@ html class="no-js" lang="en"
 
     javascript:
       App.currentUserData = #{{current_user.to_json}};
-      window.userLat = #{{current_user ? current_user.lat : request.location.latitude}};
-      window.userLng = #{{current_user ? current_user.lng : request.location.longitude}};
+      if (#{{request.location.present?}}) {
+        window.currentLocation = {
+          lat: #{{request.location.latitude}},
+          lng: #{{request.location.longitude}}
+        }
+      }
+      else if (App.currentUserData) {
+        window.currentLocation = {
+          lat: #{{current_user.try(:lat) || Location::DEFAULT_LOCATION[:lat]}},
+          lng: #{{current_user.try(:lng) || Location::DEFAULT_LOCATION[:lng]}}
+        }
+      }
 
     = javascript_include_tag :application

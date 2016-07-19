@@ -8,7 +8,7 @@ class Dashboard
 
   def authors
     authors = AuthorsNearby.call(user: user, current_location: request_location).authors
-    authors.map do |author|
+    authors.compact.map do |author|
       UserSerializer.new(author, root: false)
     end
   end
