@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   respond_to :html, :json
 
   expose_decorated(:post, attributes: :post_params)
-  expose_decorated(:posts)
+  expose_decorated(:posts) { PostsWithQuery.new(params[:query]).all }
 
   expose(:categories) { Category.all }
 
@@ -13,9 +13,6 @@ class PostsController < ApplicationController
   end
 
   def index
-    if params[:query]
-      self.posts = PostsWithQuery.new(params[:query]).all
-    end
     respond_with posts, each_serializer: PostSerializer
   end
 

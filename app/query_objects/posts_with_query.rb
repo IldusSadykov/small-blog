@@ -6,8 +6,8 @@ class PostsWithQuery
   end
 
   def all
-    return Post.none if query.blank?
+    return Post.all_cached if query.blank?
     Post.includes(:user)
-      .where('body ilike ?', "%#{query}%")
+      .where('body ilike :query or title ilike :query', query: "%#{query}%")
   end
 end

@@ -27,12 +27,13 @@ class @Dashboard
             @renderPost(post)
             author = post.author
             location = author.location
-            latLng = {
-              lat: location.latitude
-              lng: location.longitude
-            }
-            marker = @googleMap.addMarker(latLng)
-            @googleMap.showContent(marker, author)
+            if location
+              latLng = {
+                lat: location.latitude
+                lng: location.longitude
+              }
+              marker = @googleMap.addMarker(latLng)
+              @googleMap.showContent(marker, author)
 
   renderPost: (post) =>
     @ui().postsList.append(@_postTemplate(post: post))
