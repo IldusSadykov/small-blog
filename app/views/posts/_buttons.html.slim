@@ -1,7 +1,7 @@
 - if policy(post).edit?
   = link_to "Edit post", edit_post_path(post), class: "button edit-button"
 - elsif current_user
-  - if policy(post).subscribed_by_user
+  - if policy(post).subscribed_by_user?
     a.button.disabled(href="#") Subscribed
   - elsif post.plan
     script.stripe-button(

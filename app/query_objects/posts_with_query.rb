@@ -9,7 +9,7 @@ class PostsWithQuery
 
   def all
     return Post.all_cached if query.blank?
-    Post.includes(:author)
+    Post.includes(:author, :plan)
       .where('body ilike :query or title ilike :query', query: "%#{query}%")
       .limit(POST_COUNT)
   end
