@@ -15,4 +15,8 @@ class PostPolicy < ApplicationPolicy
     return true if owner?
     user.subscriptions.map(&:plan).include?(record.plan)
   end
+
+  def owner?
+    record.author == user
+  end
 end

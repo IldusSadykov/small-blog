@@ -7,7 +7,7 @@ class Dashboard
   end
 
   def authors
-    authors = AuthorsNearby.call(user: user, current_location: request_location).authors
+    authors = FetchAuthorsNearby.call(user: user, current_location: request_location).authors
     authors.compact.map do |author|
       UserSerializer.new(author, root: false)
     end

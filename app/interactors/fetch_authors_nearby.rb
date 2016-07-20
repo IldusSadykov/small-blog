@@ -1,4 +1,4 @@
-class AuthorsNearby
+class FetchAuthorsNearby
   include Interactor
 
   delegate :user, :current_location, to: :context
