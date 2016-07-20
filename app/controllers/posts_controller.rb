@@ -53,7 +53,7 @@ class PostsController < ApplicationController
         :published,
         :category_id,
         :plan_id
-      ).merge(user: current_user)
+      ).merge(author: current_user)
   end
 
   def check_user_subscription

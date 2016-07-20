@@ -1,13 +1,12 @@
 class Dashboard
-  attr_reader :user, :request_location
+  attr_reader :current_location
 
-  def initialize(user, request_location)
-    @user = user
-    @request_location = request_location
+  def initialize(current_location)
+    @current_location = current_location
   end
 
   def authors
-    authors = FetchAuthorsNearby.call(user: user, current_location: request_location).authors
+    authors = FetchAuthorsNearby.call(current_location: current_location).authors
     authors.compact.map do |author|
       UserSerializer.new(author, root: false)
     end

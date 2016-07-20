@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  validates :title, :body, :category, :user, presence: true
+  validates :title, :body, :category, :author, presence: true
 
   belongs_to :author, foreign_key: "user_id", class_name: "User"
   has_many :comments
@@ -11,10 +11,10 @@ class Post < ActiveRecord::Base
   after_destroy :expire_post_all_cache
 
   def expire_post_all_cache
-    Rails.cache.delete('Post.all.includes(:user, :plan).limit(10)')
+    Rails.cache.delete('Post.last(10)')
   end
 
   def self.all_cached
-    Rails.cache.fetch('Post.last(10)') { Post.includes(:user, :plan).last(10) }
+    Rails.cache.fetch('Post.last(10)') { Post.includes(:author, :plan).last(10) }
   end
 end

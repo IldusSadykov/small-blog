@@ -13,8 +13,8 @@ class @GoogleMap
   initMap: ->
     if $('#map').length > 0
       currentLatLng =
-        lat: window.currentLocation.lat
-        lng: window.currentLocation.lng
+        lat: App.currentLocation.latitude
+        lng: App.currentLocation.longitude
       if navigator.geolocation
         navigator.geolocation.getCurrentPosition (position) =>
           latLng =

@@ -15,7 +15,7 @@ class UserDecorator < ApplicationDecorator
 
   def lng
     if object.location
-      object.location.lon
+      object.location.lng
     else
       Location::DEFAULT_LOCATION[:lng]
     end
