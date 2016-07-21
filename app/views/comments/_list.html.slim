@@ -1,6 +1,6 @@
 .comments-form
   h3 Comments
-  - if current_user
+  - if user_signed_in?
     .input-group.comment-add
       button.radius(href="#") New comment
     .comment-area

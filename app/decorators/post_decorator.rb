@@ -3,10 +3,6 @@ class PostDecorator < ApplicationDecorator
 
   delegate :id, :title, :body, :author, :plan
 
-  def published?
-    object.published
-  end
-
   def author_name
     object.author.full_name
   end
