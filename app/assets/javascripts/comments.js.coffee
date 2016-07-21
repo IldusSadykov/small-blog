@@ -38,6 +38,6 @@ class @Comments
   renderComment: (data) ->
     options =
       message: data.message
-      author: data.author
+      user_name: data.user_name
       created_at: data.created_at
     @ui.commentsList.prepend(@_commentTemplate(options))

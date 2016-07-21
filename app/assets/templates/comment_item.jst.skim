@@ -2,7 +2,7 @@
   .large-12.columns
     h5
       span.message = @message
-    p = @author
+    p = @user_name
     p
       ' posted in:
       '

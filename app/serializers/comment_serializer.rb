@@ -1,7 +1,7 @@
 class CommentSerializer < ActiveModel::Serializer
-  attributes :message, :author, :created_at
+  attributes :message, :user_name, :created_at
 
-  def author
+  def user_name
     object.user.full_name
   end
 
