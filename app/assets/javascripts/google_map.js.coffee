@@ -7,7 +7,7 @@ class @GoogleMap
 
   constructor: (entities) ->
     @entities = entities
-    @showContents(entities)
+    @showContents(entities) if entities
     @initMap()
 
   initMap: ->
@@ -41,11 +41,6 @@ class @GoogleMap
     )
     @markers.push marker
     marker
-
-  setUpMarkers: (entities) ->
-    $.each entities, (index, entity) =>
-      latLng = { lat: entity.location.latitude, lng: entity.location.longitude }
-      @addMarker(latLng)
 
   setMapOnAll: (map) ->
     i = 0

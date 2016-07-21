@@ -7,12 +7,13 @@ class @Dashboard
 
   ui: ->
     postsList: $("#posts-list")
+    searchUses: $(".search_users")
 
   _postTemplate: (options) ->
     JST["post_item"](options)
 
   bindEvents: ->
-    $(".search_users").on "keyup", (event) =>
+    @ui().searchUses.on "keyup", (event) =>
       target = event.currentTarget
       promise = $.ajax
         url: POSTS_URL

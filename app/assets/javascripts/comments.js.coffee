@@ -24,7 +24,8 @@ class @Comments
 
   createComment: ->
     $.ajax
-      type: 'POST'
+      type: "POST"
+      dataType: "json"
       url: "/posts/#{@ui.currentPostId}/comments"
       data:
         comment:

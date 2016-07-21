@@ -7,11 +7,8 @@ class CommentsController < ApplicationController
   respond_to :json, only: :create
 
   def create
-    if comment.save
-      render root: false, json: CommentSerializer.new(comment).serializable_hash, status: :ok
-    else
-      render root: false, json: comment.errors, status: :unprocessable_entity
-    end
+    comment.save
+    respond_with comment, location: nil, root: false
   end
 
   def edit
@@ -33,7 +30,6 @@ class CommentsController < ApplicationController
     params
       .require(:comment)
       .permit(
-        :user_id,
         :message,
         :post_id
       ).merge(user: current_user, post: post)

@@ -1,9 +1,10 @@
 .comments-form
   h3 Comments
-  .input-group.comment-add
-    button.radius(href="#") New comment
-  .comment-area
-    = render 'comments/form', post: post, comment: post.build_comment
+  - if current_user
+    .input-group.comment-add
+      button.radius(href="#") New comment
+    .comment-area
+      = render 'comments/form', post: post, comment: post.build_comment
 
 .comments-list
   = render post.comments
