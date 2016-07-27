@@ -14,22 +14,6 @@
 
 $ ->
   $(document).foundation()
-  myLatLng =
-    lat: window.userLat
-    lng: window.userLng
 
-  mapOptions =
-    zoom: 14
-    center: myLatLng
-
-  if $('#map').length > 0
-    window.map = new (google.maps.Map)(document.getElementById('map'), mapOptions)
-
-    marker = new (google.maps.Marker)(
-      position: myLatLng
-      map: map
-    )
-
-    window.Dashboard = new Dashboard
-
+  window.Dashboard = new Dashboard
   window.Comments = new Comments

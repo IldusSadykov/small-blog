@@ -11,16 +11,7 @@ class @Comments
     commentsList: $('.comments-list')
 
   _commentTemplate: (options) ->
-    #JST["comments/item"](options)
-    { message, author, created_at } = options
-    "<div class='row'> \
-      <div class='large-12 columns'> \
-        <span class='message'>#{message}</span> \
-        <h5>#{author}</h5> \
-        <p>#{created_at}</p> \
-        <hr>\
-      </div>\
-     </div>"
+    JST["comment_item"](options)
 
   bindEvents: ->
     @ui.commentAdd.on 'click', (event) =>
@@ -33,7 +24,8 @@ class @Comments
 
   createComment: ->
     $.ajax
-      type: 'POST'
+      type: "POST"
+      dataType: "json"
       url: "/posts/#{@ui.currentPostId}/comments"
       data:
         comment:
@@ -46,6 +38,6 @@ class @Comments
   renderComment: (data) ->
     options =
       message: data.message
-      author: data.author
+      user_name: data.user_name
       created_at: data.created_at
     @ui.commentsList.prepend(@_commentTemplate(options))

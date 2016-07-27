@@ -1,30 +1,40 @@
 class @Dashboard
+  POSTS_URL = window.posts_path
+
   constructor: ->
-    @locations = window.authors_coordinates
+    @googleMap = new GoogleMap(window.authors_with_locations)
     @bindEvents()
-    @showAuthorsInMap()
+
+  ui: ->
+    postsList: $("#posts-list")
+    searchUses: $(".search_users")
+
+  _postTemplate: (options) ->
+    JST["post_item"](options)
 
   bindEvents: ->
+    @ui().searchUses.on "keyup", (event) =>
+      target = event.currentTarget
+      promise = $.ajax
+        url: POSTS_URL
+        method: "GET"
+        dataType: "json"
+        data:
+          query: $(target).val()
+        success: (data) =>
+          @googleMap.clearMarkers()
+          @ui().postsList.html('')
+          $.each data.posts, (index, post) =>
+            @renderPost(post)
+            author = post.author
+            location = author.location
+            if location
+              latLng = {
+                lat: location.latitude
+                lng: location.longitude
+              }
+              marker = @googleMap.addMarker(latLng)
+              @googleMap.showContent(marker, author)
 
-  showAuthorsInMap: ->
-    $.each @locations, (index, location) =>
-      @showMarker(location)
-
-
-  showMarker: (location) ->
-    latLng = { lat: location.lat, lng: location.lng }
-    marker = new (google.maps.Marker)(
-      position: latLng
-      title: 'Hello World!')
-    marker.setMap(map)
-    @showContent(marker, location)
-
-  showContent: (marker, location) ->
-    contentString =
-      '<div id="content">' + '<div id="siteNotice">' + '</div>' +
-      '<h3 id="firstHeading" class="firstHeading">Author ' + location.user_name + '</h3>' +
-      '<div id="bodyContent">' + '<p>' + location.user_name + ' <a href=' + location.user_posts + ' target="_blank">posts</a></p>' + '</div>' +
-      '</div>'
-    infowindow = new (google.maps.InfoWindow)(content: contentString)
-    marker.addListener 'click', ->
-      infowindow.open(map, marker)
+  renderPost: (post) =>
+    @ui().postsList.append(@_postTemplate(post: post))

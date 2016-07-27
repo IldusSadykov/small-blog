@@ -1,0 +1,8 @@
+div(id="content")
+  div(id="siteNotice")
+  h3.firstHeading(id="firstHeading") Author #{@entity.full_name}
+  div(id="bodyContent")
+    p
+      = @entity.full_name
+      '
+      a(href="/users/#{@entity.id}/posts" target="_blank") posts

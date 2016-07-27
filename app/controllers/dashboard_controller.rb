@@ -1,10 +1,9 @@
 class DashboardController < ApplicationController
   respond_to :html
 
-  expose_decorated(:posts, collection: true) { Post.all_cached }
-  expose(:categories) { Category.all }
+  expose(:dashboard) { Dashboard.new(current_location) }
 
-  def index
-    respond_with posts, categories
+  def show
+    respond_with dashboard
   end
 end

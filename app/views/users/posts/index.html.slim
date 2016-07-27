@@ -1,15 +1,15 @@
 #content.row
   .large-12.columns
     - posts.each do |post|
-      = render post
-      - if post.plan.present?
-        = form_for(Subscription.new, url: subscriptions_path, method: "POST") do |f|
-          = f.text_field :user_id, type: :hidden, value: current_user.id
-          = f.text_field :plan_id, type: :hidden, value: post.plan.id
-          = f.text_field :post_id, type: :hidden, value: post.id
-          - if policy(post).subscribed_by_user
-            a.button.disabled(href="#") Subscribed
-          - else
+      = render 'posts/post', post: post
+      - if policy(post).subscribed_by_user?
+        a.button.disabled(href="#") Subscribed
+      - elsif user_signed_in?
+        - if post.plan.present?
+          = form_for(Subscription.new, url: subscriptions_path, method: "POST") do |f|
+            = f.text_field :user_id, type: :hidden, value: current_user.id
+            = f.text_field :plan_id, type: :hidden, value: post.plan.id
+            = f.text_field :post_id, type: :hidden, value: post.id
             script.stripe-button(
               src = "https://checkout.stripe.com/checkout.js"
               data = { amount: "#{post.plan.amount}",
@@ -17,3 +17,6 @@
                        description: "#{post.plan.name}",
                        key:"#{ENV['PUBLISHABLE_KEY']}" }
             )
+      - else
+        a.button.disabled(href="#{session_path(User.new)}") Subscribe
+

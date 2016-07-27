@@ -1,4 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+
+  expose(:country_list) { Country.all.map {|f| [f.name, f.id] } }
+
   private
 
   def account_update_params

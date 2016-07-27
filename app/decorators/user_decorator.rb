@@ -5,19 +5,9 @@ class UserDecorator < ApplicationDecorator
     "#{object.full_name} (#{object.email})"
   end
 
-  def lat
-    if object.location
-      object.location.lat
-    else
-      Location::DEFAULT_LOCATION[:lat]
-    end
-  end
-
-  def lng
-    if object.location
-      object.location.lon
-    else
-      Location::DEFAULT_LOCATION[:lng]
+  def plans_list
+    object.plans.map do |plan|
+      [plan.name, plan.id]
     end
   end
 end
