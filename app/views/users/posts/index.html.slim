@@ -2,7 +2,7 @@
   .large-12.columns
     - posts.each do |post|
       = render 'posts/post', post: post
-      - if policy(post).subscribed_by_user?
+      - if post.subscribed?
         a.button.disabled(href="#") Subscribed
       - elsif user_signed_in?
         - if post.plan.present?

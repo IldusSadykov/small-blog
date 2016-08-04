@@ -1,8 +1,9 @@
 class Dashboard
-  attr_reader :current_location
+  attr_reader :current_location, :user
 
-  def initialize(current_location)
+  def initialize(current_location, user)
     @current_location = current_location
+    @user = user
   end
 
   def authors
@@ -13,7 +14,8 @@ class Dashboard
   end
 
   def posts
-    @posts ||= PostDecorator.decorate_collection(Post.all_cached)
+    posts_users ||= PostUserDecorator.wrap(Post.all_cached, user)
+    @posts ||= PostDecorator.decorate_collection(posts_users)
   end
 
   def categories
