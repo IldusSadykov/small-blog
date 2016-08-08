@@ -14,11 +14,16 @@ class Dashboard
   end
 
   def posts
-    posts_users ||= PostUserDecorator.wrap(Post.all_cached, user)
     @posts ||= PostDecorator.decorate_collection(posts_users)
   end
 
   def categories
     @categories ||= Category.all
+  end
+
+  private
+
+  def posts_users
+    @posts_users ||= PostUserWrapper.wrap(Post.all_cached, user)
   end
 end

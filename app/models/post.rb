@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   has_many :comments
   belongs_to :category
   belongs_to :plan
+  belongs_to :user
   has_many :comments, dependent: :destroy
 
   after_save    :expire_post_all_cache

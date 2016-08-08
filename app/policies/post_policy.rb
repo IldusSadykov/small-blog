@@ -1,4 +1,8 @@
 class PostPolicy < ApplicationPolicy
+  def read?
+    record.plan.blank? || owner? || record.subscribed?
+  end
+
   def edit?
     owner?
   end
@@ -9,10 +13,6 @@ class PostPolicy < ApplicationPolicy
 
   def delete?
     owner?
-  end
-
-  def read?
-    record.subscribed? || record.plan.blank?
   end
 
   def owner?
