@@ -3,7 +3,7 @@ class Users::PostsController < ApplicationController
 
   expose(:user)
   expose_decorated(:post, attributes: :post_params)
-  expose_decorated(:posts) { PostUserWrapper.wrap(user.posts.includes(:author), current_user) }
+  expose_decorated(:posts) { user.posts.includes(:author) }
 
   expose(:categories) { Category.all }
 

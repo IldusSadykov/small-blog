@@ -24,6 +24,6 @@ class Dashboard
   private
 
   def posts_users
-    @posts_users ||= PostUserWrapper.wrap(Post.all_cached, user)
+    @posts_users ||= Post.all_cached
   end
 end

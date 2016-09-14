@@ -20,4 +20,8 @@ class User < ActiveRecord::Base
   def full_name_with_email
     "#{self[:full_name]} (#{email})"
   end
+
+  def subscribed?(plan)
+    subscription_plans.include?(plan)
+  end
 end

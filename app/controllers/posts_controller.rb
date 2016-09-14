@@ -16,7 +16,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    self.post = PostUserWrapper.new(post, current_user)
     authorize post, :read?
 
     respond_with post

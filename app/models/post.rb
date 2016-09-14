@@ -18,4 +18,8 @@ class Post < ActiveRecord::Base
   def self.all_cached
     Rails.cache.fetch('Post.last(10)') { Post.includes(:author, :plan).last(10) }
   end
+
+  def subscribed?(user)
+    user && user.subscription_plans.exists?(plan)
+  end
 end
