@@ -15,10 +15,7 @@ class PostDecorator < ApplicationDecorator
     if PostPolicy.new(current_user, object).edit?
       h.link_to "Edit object", h.edit_post_path(object), class: "button edit-button"
     elsif PostPolicy.new(current_user, object).can_subscribe?
-      h.form_for(Subscription.new, url: h.subscriptions_path, method: "POST") do |f|
-        f.text_field :user_id, type: :hidden, value: current_user.id
-        f.text_field :plan_id, type: :hidden, value: post.plan.id
-        f.text_field :post_id, type: :hidden, value: post.id
+      h.form_for(Subscription.new, url: h.post_subscriptions_path(object), method: "POST") do |f|
         h.javascript_include_tag("https://checkout.stripe.com/checkout.js", class: "stripe-button",
           data: {
             amount: "#{object.plan.try(:amount)}",
