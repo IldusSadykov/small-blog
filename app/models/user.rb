@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   has_many :posts, -> { includes :plan }
   has_many :plans
   has_many :subscriptions, -> { includes :plan }, through: :customer
+  has_many :subscription_plans, through: :subscriptions, source: "plan"
 
   accepts_nested_attributes_for :location
 
@@ -18,5 +19,9 @@ class User < ActiveRecord::Base
 
   def full_name_with_email
     "#{self[:full_name]} (#{email})"
+  end
+
+  def subscribed?(plan)
+    subscription_plans.include?(plan)
   end
 end

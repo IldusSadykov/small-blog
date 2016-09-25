@@ -1,14 +1,15 @@
 FactoryGirl.define do
   factory :plan do
-    name "MyString"
-amount 1
-created "2016-07-12 00:35:48"
-currency "MyString"
-interval "MyString"
-interval_count 1
-livemode false
-statement_descriptor "MyText"
-trial_period_days 1
+    name "MyPlan"
+    amount 10
+    created Time.now
+    currency "rub"
+    stripe_id "MyStripe"
+    interval "1"
+    interval_count 1
+    livemode false
+    statement_descriptor "MyText"
+    trial_period_days 5
+    association :user, factory: :user
   end
-
 end

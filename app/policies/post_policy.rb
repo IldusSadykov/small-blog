@@ -1,4 +1,12 @@
 class PostPolicy < ApplicationPolicy
+  def read?
+    record.plan.blank? || owner? || record.subscribed?(user)
+  end
+
+  def can_subscribe?
+    record.plan && !owner? && !record.subscribed?(user)
+  end
+
   def edit?
     owner?
   end
@@ -11,22 +19,7 @@ class PostPolicy < ApplicationPolicy
     owner?
   end
 
-  def read?
-    if subscribed_by_user?
-      true
-    else
-      if record.plan.blank?
-        return true
-      else
-        false
-      end
-    end
-  end
-
-  def subscribed_by_user?
-    return false if owner? or user.blank?
-    user.subscriptions.map(&:plan).include?(record.plan)
-  end
+  private
 
   def owner?
     record.author == user
