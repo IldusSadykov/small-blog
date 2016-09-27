@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720073716) do
+ActiveRecord::Schema.define(version: 20160926072540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,16 @@ ActiveRecord::Schema.define(version: 20160720073716) do
   create_table "countries", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.string   "brand"
+    t.string   "last4"
+    t.string   "name"
+    t.uuid     "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
