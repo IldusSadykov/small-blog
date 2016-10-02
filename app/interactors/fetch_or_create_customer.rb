@@ -4,7 +4,7 @@ class FetchORCreateCustomer
   delegate :current_user, :stripe_token, :stripe_email, to: :context
 
   def call
-    context.stripe_id = fetch_or_create_customer
+    context.customer = fetch_or_create_customer
   end
 
   private
@@ -15,17 +15,15 @@ class FetchORCreateCustomer
 
   def create
     current_user.update(stripe_customer_id: created_stripe_customer.id)
-    current_user.stripe_customer_id
+    created_stripe_customer
   end
 
   def fetch
-    if Stripe::Customer.retrieve(current_user.stripe_customer_id)
-      current_user.stripe_customer_id
-    end
+    @customer ||= Stripe::Customer.retrieve(current_user.stripe_customer_id)
   end
 
   def created_stripe_customer
-    Stripe::Customer.create(
+    @customer ||= Stripe::Customer.create(
       source: stripe_token,
       email: stripe_email
     )

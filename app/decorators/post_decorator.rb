@@ -15,13 +15,14 @@ class PostDecorator < ApplicationDecorator
     if PostPolicy.new(current_user, object).edit?
       h.link_to "Edit object", h.edit_post_path(object), class: "button edit-button"
     elsif PostPolicy.new(current_user, object).can_subscribe?
-      h.form_for(Subscription.new, url: h.post_subscriptions_path(object), method: "POST") do |f|
+      h.form_tag(h.post_subscriptions_path(object), { method: "POST" }) do |f|
         h.javascript_include_tag("https://checkout.stripe.com/checkout.js", class: "stripe-button",
           data: {
             amount: "#{object.plan.try(:amount)}",
             name: "#{object.plan.try(:name)}",
             description: "#{object.plan.try(:name)}",
-            key:"#{ENV['PUBLISHABLE_KEY']}"
+            key: "#{ENV['PUBLISHABLE_KEY']}",
+            label: "Subscribe"
           }
         )
       end

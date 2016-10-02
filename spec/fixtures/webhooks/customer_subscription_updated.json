@@ -1,0 +1,63 @@
+{
+  "created": 1326853478,
+  "livemode": false,
+  "id": "evt_00000000000000",
+  "type": "customer.subscription.updated",
+  "object": "event",
+  "request": null,
+  "pending_webhooks": 1,
+  "api_version": "2016-07-06",
+  "data": {
+    "object": {
+      "id": "sub_00000000000000",
+      "object": "subscription",
+      "application_fee_percent": null,
+      "cancel_at_period_end": false,
+      "canceled_at": null,
+      "created": 1474960623,
+      "current_period_end": 1477552623,
+      "current_period_start": 1474960623,
+      "customer": "cus_00000000000000",
+      "discount": null,
+      "ended_at": null,
+      "livemode": false,
+      "metadata": {},
+      "plan": {
+        "id": "Edison plan_00000000000000",
+        "object": "plan",
+        "amount": 5,
+        "created": 1468479918,
+        "currency": "usd",
+        "interval": "month",
+        "interval_count": 1,
+        "livemode": false,
+        "metadata": {},
+        "name": "Edison plan",
+        "statement_descriptor": null,
+        "trial_period_days": null
+      },
+      "quantity": 1,
+      "start": 1475450382,
+      "status": "active",
+      "tax_percent": null,
+      "trial_end": null,
+      "trial_start": null
+    },
+    "previous_attributes": {
+      "plan": {
+        "id": "OLD_PLAN_ID",
+        "object": "plan",
+        "amount": 999,
+        "created": 1474869223,
+        "currency": "usd",
+        "interval": "month",
+        "interval_count": 1,
+        "livemode": false,
+        "metadata": {},
+        "name": "Old plan",
+        "statement_descriptor": null,
+        "trial_period_days": null
+      }
+    }
+  }
+}

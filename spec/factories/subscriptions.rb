@@ -3,9 +3,8 @@ FactoryGirl.define do
     cancel_at_period_end false
     canceled_at nil
     created Time.now
-    current_period_end nil
-    current_period_start nil
-    customer_id ""
+    current_period_end Time.now + 1.week
+    current_period_start Time.now
     ended_at 1.month.from_now
     livemode false
     quantity 1
@@ -13,7 +12,6 @@ FactoryGirl.define do
     status "active"
     trial_end nil
     trial_start nil
-    association :customer, factory: :customer
     association :plan, factory: :plan
   end
 end

@@ -20,6 +20,6 @@ class Post < ActiveRecord::Base
   end
 
   def subscribed?(user)
-    user && user.subscription_plans.exists?(plan)
+    plan && user && plan.subscriptoin_users_ids.include?(user.id)
   end
 end
