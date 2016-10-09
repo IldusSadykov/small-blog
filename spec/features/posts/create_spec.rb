@@ -19,7 +19,7 @@ feature "Create new post" do
     expect(page).to have_css("input#post_published")
   end
 
-  def fill_form(title="", body="")
+  def fill_form(title = "", body = "")
     within("form.new_post") do
       fill_in "Title", with: title
       fill_in "Body", with: body

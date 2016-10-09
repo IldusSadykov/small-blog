@@ -7,7 +7,7 @@ describe Webhooks::SubscriptionsController do
   def post_request
     post "create",
       event_id: event_response.id,
-      format: 'json'
+      format: "json"
   end
 
   describe "POST #create" do
@@ -30,8 +30,8 @@ describe Webhooks::SubscriptionsController do
         subscription.reload
         expect(response).to be_success
         expect(response.code).to eq "201"
-        expect(subscription.current_period_start).to eq Time.at(stripe_subscription.period.start).to_time
-        expect(subscription.current_period_end).to eq Time.at(stripe_subscription.period.end).to_time
+        expect(subscription.current_period_start).to eq Time.zone.at(stripe_subscription.period.start)
+        expect(subscription.current_period_end).to eq Time.zone.at(stripe_subscription.period.end)
       end
     end
 
@@ -54,7 +54,7 @@ describe Webhooks::SubscriptionsController do
 
       it "a request should not update subscription" do
         subscription.reload
-        expect{ post_request }.to_not change { subscription.plan.name }
+        expect { post_request }.to_not change { subscription.plan.name }
         expect(response).to be_success
         expect(response.code).to eq "201"
       end
