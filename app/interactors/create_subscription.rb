@@ -12,7 +12,7 @@ class CreateSubscription
   private
 
   def stripe_plan
-    Stripe::Plan.retrieve(plan.stripe_id)
+    @stripe_plan ||= Stripe::Plan.retrieve(plan.stripe_id)
   end
 
   def stripe_customer
