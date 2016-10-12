@@ -13,16 +13,12 @@ module StripeSubscriptions
     def subscription
       @subscription ||= SubscriptionFetch.call(
         stripe_sub_id: stripe_subscription.id,
-        stripe_customer_id: event.customer).subscription
+        stripe_customer_id: event.customer
+      ).subscription
     end
 
     def subscription_params
-      event = Stripe::StripeObject.construct_from(
-        id: stripe_subscription.id,
-        current_period_start: stripe_subscription.period.start,
-        current_period_end: stripe_subscription.period.end
-      )
-      StripeSubscription.new(event).as_json(
+      StripeSubscription.new(builded_event).as_json(
         only: %i(
           stripe_id
           current_period_start
@@ -33,6 +29,14 @@ module StripeSubscriptions
 
     def stripe_subscription
       event.lines.data[0]
+    end
+
+    def builded_event
+      @builded_event ||= Stripe::StripeObject.construct_from(
+        id: stripe_subscription.id,
+        current_period_start: stripe_subscription.period.start,
+        current_period_end: stripe_subscription.period.end
+      )
     end
   end
 end

@@ -81,7 +81,7 @@ group :development, :test do
   gem "pry-rails"
   gem "rails_best_practices", require: false
   gem "rspec-rails", "~> 3.0"
-  gem "rubocop", require: false
+  gem "rubocop", "~> 0.43.0", require: false
   gem "rubocop-rspec", require: false
   gem "scss_lint", require: false
   gem "slim_lint", require: false

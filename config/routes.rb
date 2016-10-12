@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'users/registrations' }
+  devise_for :users, controllers: { registrations: "users/registrations" }
   resources :posts do
     resources :comments, only: %i(create show edit update destroy)
     resource :subscriptions, only: :create, module: :posts
@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   namespace :webhooks do
     resource :subscriptions
   end
-  root to: 'dashboard#show'
+  root to: "dashboard#show"
 end

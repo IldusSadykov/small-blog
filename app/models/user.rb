@@ -22,6 +22,6 @@ class User < ActiveRecord::Base
   end
 
   def subscribed?(plan)
-    plan = subscription_plans.find_by(id: plan.id) && plan.active?
+    subscription_plans.find_by(id: plan.id) && plan.active?
   end
 end

@@ -13,7 +13,8 @@ module StripeSubscriptions
     def subscription
       @subscription ||= SubscriptionFetch.call(
         stripe_sub_id: event.id,
-        stripe_customer_id: event.customer).subscription
+        stripe_customer_id: event.customer
+      ).subscription
     end
 
     def subscription_params

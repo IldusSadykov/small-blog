@@ -10,7 +10,7 @@ module StripeSubscriptions
       "charge.failed" => NotifyPaymentFailure,
       "customer.subscription.updated" => SubscriptionUpdate,
       "customer.subscription.deleted" => SubscriptionUpdate
-    }
+    }.freeze
 
     def call
       EVENT_TYPES[event_type].send(:call, event: event_object)

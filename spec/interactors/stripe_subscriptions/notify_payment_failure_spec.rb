@@ -4,7 +4,7 @@ describe StripeSubscriptions::NotifyPaymentFailure do
   describe ".call" do
     let!(:user) { create :user, stripe_customer_id: event.customer }
 
-    let!(:event) { double :event, customer: "stripe_customer_id"}
+    let!(:event) { double :event, customer: "stripe_customer_id" }
     let(:user_mailer) { double :user_mailer }
 
     subject(:interactor) { described_class.call(event: event) }
