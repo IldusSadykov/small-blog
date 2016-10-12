@@ -1,4 +1,7 @@
 #content.row
+  .medium-8.columns
+    h3
+      = link_to 'Add new post', new_post_path
   .large-12.columns
     - posts.each do |post|
       = render 'posts/post', post: post

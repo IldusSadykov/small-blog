@@ -28,11 +28,11 @@ feature "List of current_user posts" do
   before do
     login_as user
 
-    visit posts_path
+    visit user_posts_path(user)
   end
 
   scenario "I am in index page" do
-    expect(current_path).to eq posts_path
+    expect(current_path).to eq user_posts_path(user)
     expect(page).to have_content("My Post 1")
   end
 

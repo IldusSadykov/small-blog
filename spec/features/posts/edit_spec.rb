@@ -28,7 +28,7 @@ feature "Edit posts" do
   before do
     login_as user
 
-    visit posts_path
+    visit user_posts_path(user)
   end
 
   def fill_form(title = "", body = "")

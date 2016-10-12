@@ -18,7 +18,7 @@ class StripeSubscription < SimpleDelegator
 
   def as_json(options = {})
     attrs = options[:only] ? options[:only] : ATTRIBUTES
-    attrs.each_with_object({}) do |hash, attr|
+    attrs.each_with_object({}) do |attr, hash|
       next hash unless public_methods.include?(attr)
       hash[attr] = public_send(attr)
       hash

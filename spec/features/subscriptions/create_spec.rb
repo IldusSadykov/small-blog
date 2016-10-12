@@ -19,7 +19,6 @@ feature "Create new subscription", js: true do
     Stripe::StripeObject.construct_from(result)
   end
   let(:stripe_plan) { double :stripe_plan, id: stripe_subscription.plan.id }
-  let(:stripe_card) { double :stripe_plan, id: "plan_stripe_id" }
   let!(:stripe_card) do
     result = JSON.parse(File.read("spec/fixtures/stripe_credit_card.json"))
     Stripe::StripeObject.construct_from(result)

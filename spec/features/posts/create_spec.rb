@@ -7,7 +7,7 @@ feature "Create new post" do
   before do
     login_as user
 
-    visit root_path
+    visit user_posts_path(user)
     click_link "Add new post"
   end
 

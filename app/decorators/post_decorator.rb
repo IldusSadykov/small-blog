@@ -15,7 +15,7 @@ class PostDecorator < ApplicationDecorator
 
   def actions_block(current_user)
     if PostPolicy.new(current_user, object).edit?
-      h.link_to "Edit object", h.edit_post_path(object), class: "button edit-button"
+      h.link_to "Edit post", h.edit_post_path(object), class: "button edit-button"
     elsif PostPolicy.new(current_user, object).can_subscribe?
       h.form_tag(h.post_subscriptions_path(object), method: "POST") { show_subscription_button }
     elsif object.subscribed?(current_user)
