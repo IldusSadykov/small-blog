@@ -4,6 +4,6 @@ class ApplicationDecorator < Draper::Decorator
   end
 
   def created_at
-    object.created_at.strftime('%B %d, %Y %H:%M')
+    object.created_at.strftime("%B %d, %Y %H:%M")
   end
 end

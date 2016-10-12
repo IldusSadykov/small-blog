@@ -4,12 +4,16 @@ FactoryGirl.define do
   factory :post do
     title "MyString"
     body "MyText"
-    association :user, factory: :user
-    association :category, factory: :category
+    user
+    category
     published false
   end
 
   trait :published do
     published true
+  end
+
+  trait :with_plan do
+    plan
   end
 end

@@ -7,30 +7,32 @@ feature "List of current_user posts" do
   let!(:post) { create(:post, user: user, title: "My Post 1") }
   let!(:published_post) { create(:post, :published, user: user, title: "My Post 2") }
   let!(:another_post) do
-    create(:post,
-           user: another_user,
-           title: "Another user post 1",
-           body: "another test body"
-          )
+    create(
+      :post,
+      user: another_user,
+      title: "Another user post 1",
+      body: "another test body"
+    )
   end
 
   let!(:published_another_post) do
-    create(:post,
-           :published,
-           user: another_user,
-           title: "Another user post 2",
-           body: "another test body"
-          )
+    create(
+      :post,
+      :published,
+      user: another_user,
+      title: "Another user post 2",
+      body: "another test body"
+    )
   end
 
   before do
     login_as user
 
-    visit posts_path
+    visit user_posts_path(user)
   end
 
   scenario "I am in index page" do
-    expect(current_path).to eq posts_path
+    expect(current_path).to eq user_posts_path(user)
     expect(page).to have_content("My Post 1")
   end
 

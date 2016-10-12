@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :plan do
     name "MyPlan"
     amount 10
-    created Time.now
+    created Time.zone.now
     currency "rub"
     stripe_id "MyStripe"
     interval "1"
@@ -10,6 +10,6 @@ FactoryGirl.define do
     livemode false
     statement_descriptor "MyText"
     trial_period_days 5
-    association :user, factory: :user
+    user
   end
 end

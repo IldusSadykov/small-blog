@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720073716) do
+ActiveRecord::Schema.define(version: 20160927063453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,16 +43,14 @@ ActiveRecord::Schema.define(version: 20160720073716) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "customers", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
+  create_table "credit_cards", force: :cascade do |t|
     t.string   "stripe_id"
-    t.float    "account_balance"
-    t.datetime "created"
-    t.string   "currency"
-    t.string   "description"
-    t.string   "email"
-    t.string   "livemode"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "brand"
+    t.string   "last4"
+    t.string   "name"
+    t.uuid     "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -121,7 +119,6 @@ ActiveRecord::Schema.define(version: 20160720073716) do
     t.datetime "created"
     t.datetime "current_period_end"
     t.datetime "current_period_start"
-    t.uuid     "customer_id"
     t.datetime "ended_at"
     t.boolean  "livemode"
     t.integer  "quantity"
@@ -132,7 +129,10 @@ ActiveRecord::Schema.define(version: 20160720073716) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.uuid     "plan_id"
+    t.uuid     "user_id"
   end
+
+  add_index "subscriptions", ["user_id"], name: "index_subscriptions_on_user_id", using: :btree
 
   create_table "users", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -154,6 +154,7 @@ ActiveRecord::Schema.define(version: 20160720073716) do
     t.string   "full_name"
     t.uuid     "location_id"
     t.uuid     "customer_id"
+    t.string   "stripe_customer_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -161,4 +162,5 @@ ActiveRecord::Schema.define(version: 20160720073716) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "plans", "users"
+  add_foreign_key "subscriptions", "users"
 end
