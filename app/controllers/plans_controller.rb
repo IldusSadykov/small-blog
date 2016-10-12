@@ -20,9 +20,8 @@ class PlansController < ApplicationController
     stripe_id = plan_params[:name]
     plan.stripe_id = stripe_id
     plan.save
-    stripe_plan = Stripe::Plan.create(
-      plan_params
-        .merge(id: stripe_id)
+    Stripe::Plan.create(
+      plan_params.merge(id: stripe_id)
         .except(:stripe_id, :user_id)
     )
     respond_with plan
@@ -55,6 +54,6 @@ class PlansController < ApplicationController
         :currency,
         :amount,
         :interval
-    ).merge(user_id: current_user.id)
+      ).merge(user_id: current_user.id)
   end
 end

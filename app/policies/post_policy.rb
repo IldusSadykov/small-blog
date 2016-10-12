@@ -12,7 +12,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def update?
-    edit? && (not record.published?)
+    edit? && !record.published?
   end
 
   def delete?

@@ -5,11 +5,11 @@ class User < ActiveRecord::Base
   validates :full_name, presence: true
 
   belongs_to :location
-  belongs_to :customer
   has_many :posts, -> { includes :plan }
   has_many :plans
-  has_many :subscriptions, -> { includes :plan }, through: :customer
+  has_many :subscriptions, -> { includes :plan }
   has_many :subscription_plans, through: :subscriptions, source: "plan"
+  has_many :credit_cards
 
   accepts_nested_attributes_for :location
 
@@ -22,6 +22,6 @@ class User < ActiveRecord::Base
   end
 
   def subscribed?(plan)
-    subscription_plans.include?(plan)
+    subscription_plans.find_by(id: plan.id) && plan.active?
   end
 end

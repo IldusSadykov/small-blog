@@ -6,30 +6,32 @@ feature "Edit posts" do
   let!(:category) { create :category, name: "News" }
 
   let!(:post) do
-    create(:post,
-           user: user,
-           title: "My post",
-           body: "test body",
-           category: category
-          )
+    create(
+      :post,
+      user: user,
+      title: "My post",
+      body: "test body",
+      category: category
+    )
   end
 
   let!(:another_post) do
-    create(:post,
-           user: another_user,
-           title: "Another user post",
-           body: "another test body",
-           category: category
-          )
+    create(
+      :post,
+      user: another_user,
+      title: "Another user post",
+      body: "another test body",
+      category: category
+    )
   end
 
   before do
     login_as user
 
-    visit posts_path
+    visit user_posts_path(user)
   end
 
-  def fill_form(title="", body="")
+  def fill_form(title = "", body = "")
     fill_in "Title", with: title
     fill_in "Body", with: body
   end

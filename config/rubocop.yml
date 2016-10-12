@@ -1,13 +1,17 @@
-require: rubocop-rspec
+Rails:
+  Enabled: true
 
 AllCops:
-  RunRailsCops: true
+  TargetRubyVersion: 2.3
   DisplayCopNames: true
   Exclude:
     - bin/**/*
     - db/**/*
     - lib/templates/**/*
     - vendor/**/*
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
 
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
@@ -41,3 +45,6 @@ Style/AlignParameters:
   SupportedStyles:
     - with_first_parameter
     - with_fixed_indentation
+Metrics/AbcSize:
+  Max: 30
+  Enabled: true#

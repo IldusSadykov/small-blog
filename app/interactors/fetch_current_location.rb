@@ -1,6 +1,8 @@
 class FetchCurrentLocation
   include Interactor
 
+  DEFAULT_CITY = "Kazan".freeze
+
   delegate :current_user, :request_location, to: :context
 
   def call
@@ -10,18 +12,18 @@ class FetchCurrentLocation
   private
 
   def fetch_location
-    @location ||= if coordinates_present?(request_location)
-      request_location
-    elsif current_user
-      current_user.location
-    else
-      @result ||= Geocoder.search("Kazan")
-      location_params = @result.first.data["geometry"]["location"]
-      Location.new(location_params)
-    end
+    return request_location if coordinates_present?(request_location)
+    return current_user.location if current_user.present?
+    fetched_default_location
   end
 
   def coordinates_present?(location)
-    location.latitude.to_i > 0 && location.longitude.to_i > 0
+    location.latitude.to_i.nonzero? && location.longitude.to_i.nonzero?
+  end
+
+  def fetched_default_location
+    @result ||= Geocoder.search(DEFAULT_CITY)
+    location_params = @result.first.data["geometry"]["location"]
+    Location.new(location_params)
   end
 end
