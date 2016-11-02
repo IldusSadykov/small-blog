@@ -1,12 +1,8 @@
-= div_for post.object, class: 'blog-post'
-  h3
-    = link_to post.title, post_path(post)
+= div_for post.object, class: "blog-post panel"
+  h4
+    = link_to post.author_name, "#"
     '
-    small = post.created_at
-  p #{post.body}
-  .callout
-    ul.menu.simple
-      li
-        ' Author:
-        = link_to post.author_name, '#'
-      li = post.created_at
+    small = "from #{post.created_at}"
+  h3 = post.title
+  p #{post.body.truncate(240)}
+  = link_to "Read more...", post_path(post)

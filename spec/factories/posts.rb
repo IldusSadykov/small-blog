@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :post do
-    title "MyString"
-    body "MyText"
+    title { Faker::Lorem.sentence }
+    body { Faker::Lorem.sentences(10).join(" ") }
     user
     category
     published false
