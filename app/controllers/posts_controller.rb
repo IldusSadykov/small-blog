@@ -56,6 +56,6 @@ class PostsController < ApplicationController
         :published,
         :category_id,
         :plan_id
-      ).merge(author: current_user)
+    ).merge(author: current_user)
   end
 end

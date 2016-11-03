@@ -1,7 +1,7 @@
-@charset "utf-8";
+@charset 'utf-8';
 
-@import "settings";
-@import "foundation";
+@import 'settings';
+@import 'foundation';
 
 // If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
 //
@@ -45,9 +45,6 @@
 @include foundation-title-bar;
 @include foundation-tooltip;
 @include foundation-top-bar;
-
-$info-color: #a0d3e8;
-$alert-function-factor: -14%;
 
 // If you'd like to include motion-ui the foundation-rails gem comes prepackaged with it, uncomment the 3 @imports, if you are not using the gem you need to install the motion-ui sass package.
 //

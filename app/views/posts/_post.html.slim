@@ -1,8 +1,12 @@
-= div_for post.object, class: "blog-post panel"
-  h4
-    = link_to post.author_name, "#"
+= div_for post.object, class: "blog-post"
+  h3
+    = post.title
     '
-    small = "from #{post.created_at}"
-  h3 = post.title
+    small = post.created_at
   p #{post.body.truncate(240)}
   = link_to "Read more...", post_path(post)
+  .callout
+    ul.menu.simple
+      li = link_to "Author: Mike Mikers", "#"
+      li = link_to "Comments #{post.comments.count}", "#"
+hr

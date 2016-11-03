@@ -9,6 +9,7 @@
 #= require foundation
 #= require current_user
 #= require skim
+#= requree plugins/query.autocomplete
 #= require_tree ../templates
 #= require_tree .
 
@@ -17,3 +18,8 @@ $ ->
 
   window.Dashboard = new Dashboard
   window.Comments = new Comments
+
+  $searchInput = $(".search_users")
+  if $searchInput.length
+    postAutocomplete = new App.Components.PostsAutocomplete($searchInput)
+    searchAuthors = new App.Components.SearchAuthors($searchInput)

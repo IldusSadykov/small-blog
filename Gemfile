@@ -9,10 +9,10 @@ gem "pg"
 gem "autoprefixer-rails"
 gem "coffee-rails"
 gem "foundation-icons-sass-rails"
-gem "foundation-rails"
+gem "foundation-rails", "~> 6.2.4.0"
 gem "jquery-rails"
 gem "sass-rails", "~> 5.0.0"
-gem "skim", git: "https://github.com/jfirebaugh/skim"
+gem "skim", "~> 0.10.0"
 gem "therubyracer", platforms: :ruby
 gem "uglifier", ">= 2.7.2"
 

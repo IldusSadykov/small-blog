@@ -3,7 +3,7 @@ class @Dashboard
 
   constructor: ->
     @googleMap = new GoogleMap(window.authors_with_locations)
-    @bindEvents()
+    #@bindEvents()
 
   ui: ->
     postsList: $("#posts-list")
