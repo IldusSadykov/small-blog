@@ -9,17 +9,20 @@
 #= require foundation
 #= require current_user
 #= require skim
-#= requree plugins/query.autocomplete
 #= require_tree ../templates
 #= require_tree .
 
 $ ->
   $(document).foundation()
 
-  window.Dashboard = new Dashboard
   window.Comments = new Comments
 
   $searchInput = $(".search_users")
+
   if $searchInput.length
     postAutocomplete = new App.Components.PostsAutocomplete($searchInput)
-    searchAuthors = new App.Components.SearchAuthors($searchInput)
+    mapEl = document.getElementById('map')
+
+    if document.body.contains(mapEl)
+      googleMap = (new App.Components.Gmap(mapEl)).render()
+      markers = new App.Components.Markers(googleMap)

@@ -21,5 +21,5 @@
           = link_to category.name, category_path(category)
 
 javascript:
-  window.authors_with_locations = #{{dashboard.authors.to_json}};
+  window.App.authors = #{{dashboard.authors.to_json}};
   window.posts_path = "#{{posts_path}}";

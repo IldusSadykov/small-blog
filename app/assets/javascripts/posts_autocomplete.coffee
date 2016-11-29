@@ -4,7 +4,6 @@ class App.Components.PostsAutocomplete
   POSTS_URL = window.posts_path
 
   constructor: (@$el) ->
-    @googleMap = new GoogleMap(window.authors_with_locations)
     @initAutocomplete()
 
   initAutocomplete: ->
@@ -19,21 +18,11 @@ class App.Components.PostsAutocomplete
             author: post.author
           }
         )
+
       onSearchComplete: (query, posts) =>
-        @googleMap.clearMarkers()
-        $.each posts, (index, post) =>
-          @showAuthor(post.author)
+        authors = posts.map (post) -> return post.author
+        $(document).trigger("app:search_authors:done", [authors])
 
       onSelect: (post) =>
-        @googleMap.clearMarkers()
-        @showAuthor(post.author)
-
-  showAuthor: (author) =>
-    location = author.location
-    if location
-      latLng = {
-        lat: location.latitude
-        lng: location.longitude
-      }
-      marker = @googleMap.addMarker(latLng)
-      @googleMap.showContent(marker, author)
+        author = post.author
+        $(document).trigger("app:search_author:done", author)
