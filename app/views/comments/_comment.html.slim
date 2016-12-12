@@ -1,14 +1,9 @@
-.row
-  .large-12.columns
-    h5
-      span.message = comment.message
-    p
-      ' Author:
-      '
-      = comment.user_name
+= div_for comment.object, class: "blog-post"
+  h4
+    span.message = comment.message
     '
-    p
-      ' posted in:
-      '
-      = comment.created_at
-    = render 'comments/buttons', comment: comment.object
+    small = comment.created_at
+  h5 = link_to "Author: #{comment.user_name}", "#"
+  p #{comment.message}
+  = render 'comments/buttons', comment: comment.object
+hr

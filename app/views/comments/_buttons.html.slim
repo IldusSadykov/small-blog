@@ -1,4 +1,4 @@
 - if policy(comment).edit?
-  = link_to t('app.button.edit'), edit_post_comment_path(comment.post, comment), class: 'button edit-button'
+  = link_to t('app.button.edit'), edit_post_comment_path(comment.post, comment), class: 'button success'
 - if policy(comment).delete?
-  = link_to t('app.button.delete'), post_comment_path(comment.post, comment), class: 'button edit-button', method: :delete
+  = link_to t('app.button.delete'), post_comment_path(comment.post, comment), class: 'button alert', method: :delete

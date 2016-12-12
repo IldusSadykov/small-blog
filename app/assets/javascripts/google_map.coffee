@@ -12,7 +12,12 @@ class App.Components.Gmap
 
     if navigator.geolocation
       navigator.geolocation.getCurrentPosition (position) =>
-        map.setCenter(@_parsePosition(position))
+        location = @_parsePosition(position)
+        map.setCenter(location)
+        new google.maps.Marker(
+          position: location
+          map: map
+        )
     map
 
   _parsePosition: (data) ->

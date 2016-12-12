@@ -11,7 +11,7 @@
 #content.row
   #posts-list.medium-8.columns
     - dashboard.posts.each do |post|
-      = render 'posts/post', post: post
+      = render 'users/posts/post', post: post
       = render 'posts/buttons', post: post
   aside.large-3.columns
     h5 Categories

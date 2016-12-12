@@ -13,7 +13,7 @@ class FetchCurrentLocation
 
   def fetch_location
     return request_location if coordinates_present?(request_location)
-    return current_user.location if current_user.present?
+    return current_user.location if current_user.present? && current_user.location
     fetched_default_location
   end
 
