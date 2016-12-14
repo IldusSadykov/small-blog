@@ -9,6 +9,7 @@ class @Comments
     currentPostId: $('.current-post').attr('id')
     form: $('form.new_comment')
     commentsList: $('.comments-list')
+    deleteButton: $('.button.delete')
 
   _commentTemplate: (options) ->
     JST["comment_item"](options)
@@ -22,11 +23,16 @@ class @Comments
       event.preventDefault()
       @createComment(event)
 
+    @ui.deleteButton.on 'click', (event) =>
+      event.stopPropagation()
+      event.preventDefault()
+      @deleteComment(event)
+
   createComment: ->
     $.ajax
       type: "POST"
       dataType: "json"
-      url: "/posts/#{@ui.currentPostId}/comments"
+      url: @ui.form.prop("action")
       data:
         comment:
           message: @ui.form.find("textarea[name='comment[message]']").val()
@@ -37,7 +43,20 @@ class @Comments
 
   renderComment: (data) ->
     options =
+      comment_id: data.id
       message: data.message
       user_name: data.user_name
       created_at: data.created_at
+      comment_path: data.comment_path
     @ui.commentsList.prepend(@_commentTemplate(options))
+    @bindEvents()
+
+  deleteComment: (event) ->
+    target = event.currentTarget
+    $.ajax
+      type: "DELETE"
+      dataType: "json"
+      url: target.href
+      success: (response) =>
+        alert("Success delete comment!")
+        target.parentNode.remove()

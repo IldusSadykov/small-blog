@@ -1,9 +1,6 @@
-= div_for comment.object, class: "blog-post"
-  h4
-    span.message = comment.message
-    '
-    small = comment.created_at
-  h5 = link_to "Author: #{comment.user_name}", "#"
+= div_for comment.object, class: "blog-comment"
   p #{comment.message}
+  h4
+    small Comment by #{comment.user_name} in #{comment.created_at}
   = render 'comments/buttons', comment: comment.object
 hr

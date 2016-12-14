@@ -12,7 +12,8 @@
   #posts-list.medium-8.columns
     - dashboard.posts.each do |post|
       = render 'users/posts/post', post: post
-      = render 'posts/buttons', post: post
+      - if user_signed_in?
+        = render 'posts/buttons', post: post
   aside.large-3.columns
     h5 Categories
     ul.side-nav
