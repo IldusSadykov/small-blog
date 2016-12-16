@@ -9,7 +9,7 @@ class @Comments
     currentPostId: $('.current-post').attr('id')
     form: $('form.new_comment')
     commentsList: $('.comments-list')
-    deleteButton: $('.button.delete')
+    deleteButton: $('.button.delete-comment')
 
   _commentTemplate: (options) ->
     JST["comment_item"](options)

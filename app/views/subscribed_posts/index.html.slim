@@ -1,0 +1,5 @@
+#content.row
+  .large-12.columns
+    - posts.each do |post|
+      = render "posts/post", post: post
+      = link_to "Unsubscribe", subscribed_post_path(post), class: "button alert delete-subscription"

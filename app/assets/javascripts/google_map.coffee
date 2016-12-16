@@ -14,10 +14,6 @@ class App.Components.Gmap
       navigator.geolocation.getCurrentPosition (position) =>
         location = @_parsePosition(position)
         map.setCenter(location)
-        new google.maps.Marker(
-          position: location
-          map: map
-        )
     map
 
   _parsePosition: (data) ->

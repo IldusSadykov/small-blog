@@ -33,11 +33,11 @@ class PostDecorator < ApplicationDecorator
 
   def checkout_info
     {
-      amount: object.plan.try(:amount),
-      name: object.plan.try(:name),
-      description: object.plan.try(:name),
+      amount: object.plan&.amount,
+      name: object.plan&.name,
+      description: object.plan&.name,
       key: ENV["PUBLISHABLE_KEY"],
-      label: "Subscribe"
+      label: "Subscribe to #{object.plan&.name} $#{object.plan&.amount/100}"
     }
   end
 end
