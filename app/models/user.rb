@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
   belongs_to :location
   has_many :posts, -> { includes :plan }
   has_many :plans
-  has_many :subscriptions, -> { includes :plan }
+  has_many :subscriptions, -> { includes(:plan).active }
   has_many :subscription_plans, through: :subscriptions, source: "plan"
   has_many :credit_cards
+  has_many :subscribed_posts, through: :subscription_plans, source: "posts"
 
   accepts_nested_attributes_for :location
 

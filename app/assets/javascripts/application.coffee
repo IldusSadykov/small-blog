@@ -15,5 +15,22 @@
 $ ->
   $(document).foundation()
 
-  window.Dashboard = new Dashboard
   window.Comments = new Comments
+
+  $searchInput = $(".search_users")
+  $closeButton = $("button.close")
+  $deleteSubscription = $(".delete-subscription")
+
+  if $searchInput.length
+    postAutocomplete = new App.Components.PostsAutocomplete($searchInput)
+    mapEl = document.getElementById('map')
+
+    if document.body.contains(mapEl)
+      googleMap = (new App.Components.Gmap(mapEl)).render()
+      markers = new App.Components.Markers(googleMap)
+
+  $closeButton.on "click", ->
+    @parentNode.remove()
+
+  if $deleteSubscription
+    new App.Components.DeleteSubscription($deleteSubscription)

@@ -1,11 +1,16 @@
 class PostPolicy < ApplicationPolicy
   def read?
-    record.plan.blank? || owner? || record.subscribed?(user)
+    owner? || record.plan.blank? || record.subscribed?(user)
+  end
+
+  def subscribed?
+    record.subscribed?(user)
   end
 
   def can_subscribe?
     record.plan && !owner? && !record.subscribed?(user)
   end
+
 
   def edit?
     owner?

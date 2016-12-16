@@ -1,10 +1,7 @@
-.row
-  .large-12.columns
-    h5
-      span.message = @message
-    p = @user_name
-    p
-      ' posted in:
-      '
-      = @created_at
-    hr
+.comment.blog-comment(id="comment_#{@comment_id}")
+  p #{@message}
+  h4
+    small Commented by #{@user_name} in #{@created_at}
+  a.button.delete-comment.alert(href="#{@comment_path}" rel="nofollow" data-method="delete")
+    span Delete
+hr

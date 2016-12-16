@@ -1,12 +1,11 @@
-nav.top-bar( data-topbar )
+.top-bar( data-topbar )
 
-  ul.title-area
-    li.name
-      h1 = link_to "Rails Base example site", root_path
-    li.toggle-topbar
-      a(href="#")
-        i.fi-list
+  .top-bar-left
+    ul.menu
+      li.menu-text
+        = link_to "Blog with subscriptions", root_path
 
-  section.top-bar-section
-    = render "navigation_main"
-    = render "navigation_user"
+  .top-bar-right
+    ul.dropdown.menu(data-dropdown-menu)
+      = render "navigation_main"
+      = render "navigation_user"

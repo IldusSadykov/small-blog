@@ -2,7 +2,7 @@
   h3 Comments
   - if user_signed_in?
     .input-group.comment-add
-      button.radius(href="#") New comment
+      button.button.radius(href="#") New comment
     .comment-area
       = render 'comments/form', post: post, comment: post.build_comment
 

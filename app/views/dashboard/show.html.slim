@@ -1,23 +1,20 @@
-.callout.large.primary
+.callout.medium.primary
   .row.column.text-center
     h1
       ' Blog
       small This is my blog. It's awesome.
 
-.row
-  .large-4.columns
-    .row.collapse
-      .large-9.columns
-        input.search_users placeholder="search" type="search" /
-      .large-3.columns
-        span.postfix
-          i.fi-magnifying-glass
+#map.row
+.row.collapse
+   input.search_users placeholder="search" type="search" /
 
 #content.row
   #posts-list.medium-8.columns
     - dashboard.posts.each do |post|
-      = render 'posts/post', post: post
-      = render 'posts/buttons', post: post
+      - cache post do
+        = render 'users/posts/post', post: post
+      - if user_signed_in?
+        = render 'posts/buttons', post: post
   aside.large-3.columns
     h5 Categories
     ul.side-nav
@@ -25,8 +22,6 @@
         li
           = link_to category.name, category_path(category)
 
-#map.row
-
 javascript:
-  window.authors_with_locations = #{{dashboard.authors.to_json}};
+  window.App.authors = #{{dashboard.authors.to_json}};
   window.posts_path = "#{{posts_path}}";

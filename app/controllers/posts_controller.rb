@@ -13,6 +13,8 @@ class PostsController < ApplicationController
   def index
     posts = PostsWithQuery.new(params[:query]).all
     respond_with posts, each_serializer: PostSerializer
+
+    fresh_when(last_modified: posts.maximum(:updated_at))
   end
 
   def show
@@ -56,6 +58,6 @@ class PostsController < ApplicationController
         :published,
         :category_id,
         :plan_id
-      ).merge(author: current_user)
+    ).merge(author: current_user)
   end
 end

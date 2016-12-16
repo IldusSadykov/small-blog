@@ -1,13 +1,10 @@
 = div_for post.object, class: "blog-post"
   h3
-    = post.title
-  h3
+    = link_to post.title, post_path(post)
+    '
     small = post.created_at
-  - if policy(post).read?
-    p #{post.body}
-  - else
-    p #{post.body.truncate(240)}
-    = link_to "Read more...", post_path(post)
+  p #{post.body.truncate(240)}
+  = link_to "Read more...", post_path(post)
   .callout
     ul.menu.simple
       li = link_to "Author: #{post.author.full_name}", "#"
