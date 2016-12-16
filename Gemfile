@@ -38,7 +38,7 @@ gem "pundit"
 gem "rack-canonical-host"
 gem "rack-mini-profiler", require: false
 gem "responders"
-gem "rollbar"
+gem "rollbar", "~> 2.13.2"
 gem "seedbank"
 gem "stackprof"
 gem "friendly_id", "~> 5.1.0"

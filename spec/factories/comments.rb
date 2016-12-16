@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :comment, class: "Comment" do
-    message { Faker::Lorem.sentences }
+    message { Faker::Lorem.sentence }
     association :user, factory: :user
     association :post, factory: :post
   end

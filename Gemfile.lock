@@ -221,7 +221,6 @@ GEM
     newrelic_rpm (3.13.0.299)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-    oj (2.12.14)
     orm_adapter (0.5.0)
     parser (2.3.1.4)
       ast (~> 2.2)
@@ -299,8 +298,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rollbar (2.3.0)
-      oj (~> 2.12.14)
+    rollbar (2.13.3)
+      multi_json
     rspec (3.0.0)
       rspec-core (~> 3.0.0)
       rspec-expectations (~> 3.0.0)
@@ -488,7 +487,7 @@ DEPENDENCIES
   rails_best_practices
   rails_stdout_logging
   responders
-  rollbar
+  rollbar (~> 2.13.2)
   rspec-rails (~> 3.0)
   rubocop (~> 0.43.0)
   rubocop-rspec

@@ -9,6 +9,8 @@ class SubscribedPostsController < ApplicationController
   end
 
   def destroy
+    authorize post, :subscribed?
+
     result = DeleteSubscription.call(current_user: current_user, post: post)
     if result.success?
       render json: { message: "Your subscription has been successfully deleted" }, status: :ok, location: nil
