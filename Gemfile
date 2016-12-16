@@ -53,6 +53,11 @@ group :staging, :production do
   gem "memcachier"
 end
 
+group :staging do
+  gem "factory_girl_rails"
+  gem "faker"
+end
+
 group :test do
   gem "capybara"
   gem "capybara-webkit"
