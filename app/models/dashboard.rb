@@ -24,6 +24,6 @@ class Dashboard
   private
 
   def posts_users
-    @posts_users ||= Post.all_cached
+    @posts_users ||= Post.limit(10)
   end
 end
