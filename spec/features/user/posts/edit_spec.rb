@@ -14,7 +14,7 @@ feature "Edit posts" do
 
   before { visit post_path(post) }
 
-  scenario "Author updates article" do
+  scenario "Author updates post" do
     expect(page).to have_text("My post")
     expect(page).to have_text("Test body")
 
