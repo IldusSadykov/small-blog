@@ -1,0 +1,17 @@
+en:
+  app:
+    button:
+      delete: "Delete"
+
+  helpers:
+    submit:
+      # Default:
+      create: "Create %{model}"
+      update: "Update %{model}"
+
+      post:
+        create: "Create Post"
+        update: "Update Post"
+
+      comment:
+        create: "Create Comment"

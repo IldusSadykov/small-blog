@@ -1,7 +1,8 @@
 require "rails_helper"
 
 feature "Create new subscription", js: true do
-  let!(:user) { create :user, stripe_customer_id: stripe_customer.id }
+  include_context "current user signed in"
+
   let!(:post) { create :post, :published, plan: plan }
   let!(:plan) { create :plan, stripe_id: stripe_plan.id }
   let(:stripe_customer) do
@@ -25,7 +26,7 @@ feature "Create new subscription", js: true do
   end
 
   before do
-    login_as user
+    current_user.update(stripe_customer_id: stripe_customer.id)
     allow(Stripe::Plan).to receive(:retrieve).and_return(stripe_plan)
     allow(Stripe::Customer).to receive(:retrieve).with(user.stripe_customer_id).and_return(stripe_customer)
     allow(stripe_customer.subscriptions).to receive(:create).and_return(stripe_subscription)
