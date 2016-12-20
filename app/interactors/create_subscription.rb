@@ -5,8 +5,14 @@ class CreateSubscription
   delegate :stripe_id, to: :plan, prefix: true
 
   def call
-    stripe_subscription = stripe_customer.subscriptions.create(plan: stripe_plan.id)
-    current_user.subscriptions.create(subscription_params(stripe_subscription))
+    if stripe_customer
+      CustomerCreateCard.call(
+        stripe_customer: stripe_customer,
+        stripe_token: params[:stripeToken]
+      )
+      stripe_subscription = stripe_customer.subscriptions.create(plan: stripe_plan.id)
+      current_user.subscriptions.create(subscription_params(stripe_subscription))
+    end
   end
 
   private
@@ -18,7 +24,6 @@ class CreateSubscription
   def stripe_customer
     @customer ||= FetchORCreateCustomer.call(
       current_user: current_user,
-      stripe_token: params[:stripeToken],
       stripe_email: params[:stripeEmail]
     ).customer
   end
