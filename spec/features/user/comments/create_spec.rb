@@ -1,34 +1,23 @@
 require "rails_helper"
 
 feature "Create comment to existing post", js: true do
+  include_context "current user signed in"
+
   let(:user) { create(:user) }
-  let!(:post) { create(:post, user: user, title: "My Post") }
+  let!(:user_post) { create(:post, user: user, title: "My Post") }
 
   before do
-    login_as user
-
-    visit post_path(post)
+    visit post_path(user_post)
   end
 
-  def fill_form(message = "")
-    within("form#new_comment") do
-      fill_in "comment_message", with: message
-      click_button "Create Comment"
-    end
-  end
+  scenario "User creates new comment with valid params" do
 
-  scenario "I should see New comment button" do
-    within(".comments-form") do
-      expect(page).to have_content("Comments")
-      expect(page).to have_content("New comment")
-    end
-  end
-
-  scenario "I can create valid comment" do
     click_button "New comment"
 
-    fill_form("Test message")
+    fill_form :comment, { message: "Test message" }
 
-    expect(page).to have_content("Test message")
+    click_on submit(:comment)
+
+    expect(page).to have_text("Test message")
   end
 end
