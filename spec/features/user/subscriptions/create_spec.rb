@@ -28,7 +28,7 @@ feature "Create new subscription", js: true do
   before do
     current_user.update(stripe_customer_id: stripe_customer.id)
     allow(Stripe::Plan).to receive(:retrieve).and_return(stripe_plan)
-    allow(Stripe::Customer).to receive(:retrieve).with(user.stripe_customer_id).and_return(stripe_customer)
+    allow(Stripe::Customer).to receive(:retrieve).with(current_user.stripe_customer_id).and_return(stripe_customer)
     allow(stripe_customer.subscriptions).to receive(:create).and_return(stripe_subscription)
     allow(stripe_customer.sources).to receive(:create).and_return(stripe_card)
     allow(Stripe::Plan).to receive(:retrieve).and_return(stripe_plan)
