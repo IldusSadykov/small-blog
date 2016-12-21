@@ -69,6 +69,7 @@ group :test do
   gem "launchy"
   gem "shoulda-matchers", require: false
   gem "webmock", require: false
+  gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
 end
 
 group :development, :test do
