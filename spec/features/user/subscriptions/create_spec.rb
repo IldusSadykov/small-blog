@@ -12,7 +12,7 @@ feature "Create new subscription", js: true do
     #current_user.update(stripe_customer_id: stripe_customer.id)
     stripe_plan = stripe_helper.create_plan(id: "monthly", amount: 1500)
     plan = create :plan, name: "my plan", stripe_id: stripe_plan.id
-    create :post, :published, plan: plan
+    create :post, :plan: plan
 
     visit root_path
     click_button "Subscribe"

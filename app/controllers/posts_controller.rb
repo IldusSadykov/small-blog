@@ -56,7 +56,6 @@ class PostsController < ApplicationController
         :title,
         :body,
         :picture,
-        :published,
         :category_id,
         :plan_id
     )
