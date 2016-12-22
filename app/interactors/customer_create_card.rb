@@ -1,7 +1,7 @@
 class CustomerCreateCard
   include Interactor
 
-  delegate :stripe_customer, :stripe_token, to: :context
+  delegate :current_user, :stripe_customer, :stripe_token, to: :context
 
   def call
     stripe_card = stripe_customer.sources.create(source: stripe_token)
