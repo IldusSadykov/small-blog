@@ -1,48 +1,18 @@
 require "rails_helper"
 
-feature "List of current_user posts" do
-  let(:user) { create(:user) }
-  let(:another_user) { create(:user, :not_confirmed) }
+feature "List of Posts" do
+  include_context "current user signed in"
 
-  let!(:post) { create(:post, user: user, title: "My Post 1") }
-  let!(:published_post) { create(:post, :published, user: user, title: "My Post 2") }
-  let!(:another_post) do
-    create(
-      :post,
-      user: another_user,
-      title: "Another user post 1",
-      body: "another test body"
-    )
+  let(:posts) { create_list :post, posts_count, user: current_user }
+  let(:posts_count) { 3 }
+
+  def posts_on_page
+    all(".post-item")
   end
 
-  let!(:published_another_post) do
-    create(
-      :post,
-      :published,
-      user: another_user,
-      title: "Another user post 2",
-      body: "another test body"
-    )
-  end
+  scenario "Author shows own posts" do
+    visit user_posts_path(current_user)
 
-  before do
-    login_as user
-
-    visit user_posts_path(user)
-  end
-
-  scenario "I am in index page" do
-    expect(current_path).to eq user_posts_path(user)
-    expect(page).to have_content("My Post 1")
-  end
-
-  scenario "I should see my posts in index page" do
-    expect(page).to have_content("My Post 1")
-    expect(page).to have_content("My Post 2")
-  end
-
-  scenario "I should not see another user posts in index page" do
-    expect(page).not_to have_content("Another user post 1")
-    expect(page).not_to have_content("Another user post 2")
+    expect(posts_on_page.count).to eq(posts_count)
   end
 end
