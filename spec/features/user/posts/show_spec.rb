@@ -38,7 +38,7 @@ feature "Show Posts" do
     expect(page).to have_content("Not allowed to access to this resource, please subscribe")
   end
 
-  scenario "Author can't see non free post" do
+ scenario "Author can't see other user" do
     post = create(:post)
 
     visit post_path(post)
