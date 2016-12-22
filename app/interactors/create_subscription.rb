@@ -7,6 +7,7 @@ class CreateSubscription
   def call
     if stripe_customer
       CustomerCreateCard.call(
+        current_user: current_user,
         stripe_customer: stripe_customer,
         stripe_token: params[:stripeToken]
       )

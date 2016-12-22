@@ -8,7 +8,7 @@ class PostPolicy < ApplicationPolicy
   end
 
   def can_subscribe?
-    record.plan && !owner? && !record.subscribed?(user)
+    user && record.plan && !owner? && !record.subscribed?(user)
   end
 
 

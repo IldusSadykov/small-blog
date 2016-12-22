@@ -30,19 +30,11 @@ feature "Show Posts" do
     expect(page).to have_content("Not allowed to access to this resource, please subscribe")
   end
 
-  scenario "Author can't see non free post" do
-    post = create(:post, :with_plan)
-
-    visit post_path(post)
-
-    expect(page).to have_content("Not allowed to access to this resource, please subscribe")
-  end
-
- scenario "Author can't see other user" do
+  scenario "Author can see other user post" do
     post = create(:post)
 
     visit post_path(post)
 
-    expect(page).to have_content("Not allowed to access to this resource, please subscribe")
+    expect(page).to have_content(post.title)
   end
 end
