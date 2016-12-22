@@ -26,7 +26,7 @@ feature "Create new subscription", js: true do
   scenario "Author can pay stripe" do
     pay_stripe
 
-    #find("span.label", text: "Subscribed", wait: 30)
+    find("span.label", text: "Subscribed", wait: 30)
 
     expect(current_path).to eq post_path(Post.first.id)
     expect(page).to have_content post.title
