@@ -19,10 +19,10 @@ class App.Components.PostsAutocomplete
           }
         )
 
-      onSearchComplete: (query, posts) =>
+      onSearchComplete: (query, posts) ->
         authors = posts.map (post) -> return post.author
         $(document).trigger("app:search_authors:done", [authors])
 
-      onSelect: (post) =>
+      onSelect: (post) ->
         author = post.author
         $(document).trigger("app:search_author:done", author)

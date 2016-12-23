@@ -57,6 +57,6 @@ class @Comments
       type: "DELETE"
       dataType: "json"
       url: target.href
-      success: (response) =>
+      success: (response) ->
         alert("Success delete comment!")
         target.parentNode.remove()
