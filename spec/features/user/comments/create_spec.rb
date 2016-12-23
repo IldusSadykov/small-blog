@@ -10,13 +10,6 @@ feature "Create comment to existing post", js: true do
     visit post_path(post)
   end
 
-  def fill_form(message = "")
-    within("form#new_comment") do
-      fill_in "comment_message", with: message
-      click_button "Create Comment"
-    end
-  end
-
   scenario "User creates new comment with valid params" do
 
     click_button "New comment"
