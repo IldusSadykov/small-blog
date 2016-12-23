@@ -6,11 +6,6 @@ FactoryGirl.define do
     body { Faker::Lorem.sentences(20).join(" ") }
     user
     category
-    published false
-  end
-
-  trait :published do
-    published true
   end
 
   trait :with_plan do

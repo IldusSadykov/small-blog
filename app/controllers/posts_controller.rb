@@ -24,6 +24,7 @@ class PostsController < ApplicationController
   end
 
   def create
+    post.author = current_user
     post.save
     respond_with post
   end
@@ -55,9 +56,8 @@ class PostsController < ApplicationController
         :title,
         :body,
         :picture,
-        :published,
         :category_id,
         :plan_id
-    ).merge(author: current_user)
+      )
   end
 end

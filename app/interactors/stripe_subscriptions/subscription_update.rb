@@ -12,13 +12,17 @@ module StripeSubscriptions
 
     def subscription
       @subscription ||= SubscriptionFetch.call(
-        stripe_sub_id: event.id,
-        stripe_customer_id: event.customer
+        stripe_sub_id: stripe_subscription.id,
+        stripe_customer_id: event.data.object.customer
       ).subscription
     end
 
+    def stripe_subscription
+      event.data.object
+    end
+
     def subscription_params
-      StripeSubscription.new(event).as_json
+      StripeSubscription.new(stripe_subscription).as_json
     end
   end
 end

@@ -10,6 +10,6 @@ class Location < ActiveRecord::Base
   geocoded_by :address
 
   def address
-    [street, city, state, country].compact.join(", ")
+    [street, city, state, country.name].compact.join(", ")
   end
 end

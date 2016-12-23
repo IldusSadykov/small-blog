@@ -22,8 +22,15 @@ class FetchCurrentLocation
   end
 
   def fetched_default_location
-    @result ||= Geocoder.search(DEFAULT_CITY)
-    location_params = @result.first.data["geometry"]["location"]
-    Location.new(location_params)
+    result = Geocoder.search(DEFAULT_CITY)
+    Location.new(location_params(result))
+  end
+
+  def location_params(result)
+    {
+      latitude: result.first.data["geometry"]["location"]["lat"],
+      longitude: result.first.data["geometry"]["location"]["lng"],
+      city: result.first.data["address_components"].first["long_name"]
+    }
   end
 end

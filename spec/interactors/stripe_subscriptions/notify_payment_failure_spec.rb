@@ -1,10 +1,14 @@
 require "rails_helper"
+require "stripe_mock"
 
 describe StripeSubscriptions::NotifyPaymentFailure do
-  describe ".call" do
-    let!(:user) { create :user, stripe_customer_id: event.customer }
+  before { StripeMock.start }
+  after { StripeMock.stop }
 
-    let!(:event) { double :event, customer: "stripe_customer_id" }
+  describe ".call" do
+    let(:event) { StripeMock.mock_webhook_event("invoice.payment_failed") }
+    let!(:user) { create :user, stripe_customer_id: event.data.object.customer }
+
     let(:user_mailer) { double :user_mailer }
 
     subject(:interactor) { described_class.call(event: event) }

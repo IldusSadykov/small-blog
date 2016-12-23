@@ -1,8 +1,13 @@
 require "rails_helper"
+require "stripe_mock"
 
 describe StripeSubscriptions::SubscriptionRenewals do
+  before { StripeMock.start }
+  after { StripeMock.stop }
+
   describe ".call" do
-    let!(:user) { create :user }
+    let(:event) { StripeMock.mock_webhook_event("invoice.payment_succeeded") }
+    let!(:user) { create :user, stripe_customer_id: event.data.object.customer }
     let!(:subscription) do
       create(
         :subscription,
@@ -13,26 +18,15 @@ describe StripeSubscriptions::SubscriptionRenewals do
       )
     end
 
-    let!(:event_response) do
-      result = JSON.parse(
-        File.read("spec/fixtures/webhooks/payment_succeeded.json")
-      )
-      Stripe::StripeObject.construct_from(result)
-    end
-
-    let!(:event) { event_response.data.object }
-    let!(:stripe_subscription) { event.lines.data[0] }
-    let(:fetched_subscription) { double :fetched_subscription, subscription: subscription }
+    let(:stripe_subscription) { event.data.object.lines.data.last }
 
     subject(:interactor) { described_class.call(event: event) }
-
-    before do
-      allow(StripeSubscriptions::SubscriptionFetch).to receive(:call).and_return(fetched_subscription)
-    end
 
     it "does update subscription" do
       current_period_start = Time.zone.at(stripe_subscription.period.start)
       interactor
+
+      subscription.reload
       expect(subscription.current_period_start).to eq current_period_start
     end
   end

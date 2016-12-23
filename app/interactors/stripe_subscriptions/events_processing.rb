@@ -2,7 +2,7 @@ module StripeSubscriptions
   class EventsProcessing
     include Interactor
 
-    delegate :event_type, :event_object, to: :context
+    delegate :event, to: :context
 
     EVENT_TYPES = {
       "invoice.payment_succeeded" => SubscriptionRenewals,
@@ -13,7 +13,7 @@ module StripeSubscriptions
     }.freeze
 
     def call
-      EVENT_TYPES[event_type].send(:call, event: event_object)
+      EVENT_TYPES[event.type].send(:call, event: event)
     end
   end
 end
