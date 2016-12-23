@@ -13,6 +13,6 @@ Rails.application.routes.draw do
   namespace :webhooks do
     resource :subscriptions
   end
-  resources :subscribed_posts, only: %i(index  destroy)
+  resources :subscribed_posts, only: %i(index destroy)
   root to: "dashboard#show"
 end

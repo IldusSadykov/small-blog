@@ -5,15 +5,14 @@ class CreateSubscription
   delegate :stripe_id, to: :plan, prefix: true
 
   def call
-    if stripe_customer
-      CustomerCreateCard.call(
-        current_user: current_user,
-        stripe_customer: stripe_customer,
-        stripe_token: params[:stripeToken]
-      )
-      stripe_subscription = stripe_customer.subscriptions.create(plan: stripe_plan.id)
-      current_user.subscriptions.create(subscription_params(stripe_subscription))
-    end
+    return unless stripe_customer
+    CustomerCreateCard.call(
+      current_user: current_user,
+      stripe_customer: stripe_customer,
+      stripe_token: params[:stripeToken]
+    )
+    stripe_subscription = stripe_customer.subscriptions.create(plan: stripe_plan.id)
+    current_user.subscriptions.create(subscription_params(stripe_subscription))
   end
 
   private

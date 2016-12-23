@@ -58,6 +58,6 @@ class PostsController < ApplicationController
         :picture,
         :category_id,
         :plan_id
-    )
+      )
   end
 end

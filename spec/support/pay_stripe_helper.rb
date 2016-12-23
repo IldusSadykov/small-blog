@@ -1,4 +1,5 @@
 module PayStripeHelpers
+  # rubocop:disable AbcSize
   def pay_stripe
     sleep(0.7)
     within_frame "stripe_checkout_app" do
@@ -13,6 +14,7 @@ module PayStripeHelpers
       find("button[type='submit']").click
     end
   end
+  # rubocop:enable AbcSize
 end
 
 RSpec.configure do |config|
