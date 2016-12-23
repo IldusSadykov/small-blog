@@ -16,5 +16,3 @@ class App.Components.DeleteSubscription
         success: (response) ->
           target.parentNode.remove()
           alert(response.message)
-
-
