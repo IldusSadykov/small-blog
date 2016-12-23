@@ -5,7 +5,6 @@ feature "Create new subscription", js: true do
   include_context "current user signed in"
 
   let(:stripe_helper) { StripeMock.create_test_helper }
-  let(:sources) { double :sources }
   let(:stripe_customer) do
     Stripe::Customer.create(
       email: current_user.email,
@@ -34,14 +33,16 @@ feature "Create new subscription", js: true do
     wait_for_ajax
   end
 
-  after do
-    StripeMock.stop
+  after { StripeMock.stop }
+
+  def subscribe_result_message
+    find("span.label", text: "Subscribed", wait: 5)
   end
 
   scenario "Author can pay stripe" do
     pay_stripe
 
-    find("span.label", text: "Subscribed", wait: 5)
+    expect(subscribe_result_message).to have_content "Subscribed"
 
     expect(current_path).to eq post_path(Post.first.id)
     expect(page).to have_content post_title

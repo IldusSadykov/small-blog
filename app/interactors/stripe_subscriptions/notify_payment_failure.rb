@@ -11,7 +11,7 @@ module StripeSubscriptions
     private
 
     def user
-      @user ||= User.find_by(stripe_customer_id: event.customer)
+      @user ||= User.find_by(stripe_customer_id: event.data.object.customer)
     end
 
     def message
