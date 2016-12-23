@@ -1,48 +1,38 @@
 require "rails_helper"
 
-feature "List of current_user posts" do
-  let(:user) { create(:user) }
-  let(:another_user) { create(:user, :not_confirmed) }
+feature "List of Posts" do
+  include_context "current user signed in"
 
-  let!(:post) { create(:post, user: user, title: "My Post 1") }
-  let!(:published_post) { create(:post, :published, user: user, title: "My Post 2") }
-  let!(:another_post) do
-    create(
-      :post,
-      user: another_user,
-      title: "Another user post 1",
-      body: "another test body"
-    )
+  context "author own posts" do
+    let(:posts_count) { 3 }
+    let!(:posts) { create_list :post, posts_count, user: current_user }
+
+    def posts_on_page
+      all(".blog-post")
+    end
+
+    scenario "Author shows own posts" do
+      visit user_posts_path(current_user)
+
+      expect(posts_on_page.count).to eq(posts_count)
+    end
   end
 
-  let!(:published_another_post) do
-    create(
-      :post,
-      :published,
-      user: another_user,
-      title: "Another user post 2",
-      body: "another test body"
-    )
-  end
+  context "another user posts" do
+    let(:free_posts_count) { 3 }
+    let(:posts_count) { 2 }
+    let(:another_user) { create :user }
+    let!(:free_posts) { create_list :post, free_posts_count, user: another_user }
+    let!(:posts) { create_list :post, posts_count, :with_plan, user: another_user }
 
-  before do
-    login_as user
+    def posts_on_page
+      all(".blog-post")
+    end
 
-    visit user_posts_path(user)
-  end
+    scenario "Author can see another user posts" do
+      visit user_posts_path(another_user)
 
-  scenario "I am in index page" do
-    expect(current_path).to eq user_posts_path(user)
-    expect(page).to have_content("My Post 1")
-  end
-
-  scenario "I should see my posts in index page" do
-    expect(page).to have_content("My Post 1")
-    expect(page).to have_content("My Post 2")
-  end
-
-  scenario "I should not see another user posts in index page" do
-    expect(page).not_to have_content("Another user post 1")
-    expect(page).not_to have_content("Another user post 2")
+      expect(posts_on_page.count).to eq(posts_count + free_posts_count)
+    end
   end
 end

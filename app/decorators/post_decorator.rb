@@ -37,7 +37,7 @@ class PostDecorator < ApplicationDecorator
       name: object.plan&.name,
       description: object.plan&.name,
       key: ENV["PUBLISHABLE_KEY"],
-      label: "Subscribe to #{object.plan&.name} $#{object.plan&.amount/100}"
+      label: "Subscribe to #{object.plan&.name} $#{object.plan&.amount / 100}"
     }
   end
 end

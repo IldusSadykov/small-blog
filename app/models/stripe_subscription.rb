@@ -34,7 +34,7 @@ class StripeSubscription < SimpleDelegator
   end
 
   def created
-    Time.zone.at(super) if super
+    Time.zone.at(start)
   end
 
   def current_period_end

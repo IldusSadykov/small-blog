@@ -5,16 +5,16 @@ feature "Visitor sees post" do
     user = create(:user)
     another_user = create(:user)
 
-    post_1 = create(:post, user: user)
-    post_2 = create(:post, :with_plan, user: user)
-    post_3 = create(:post, :with_plan, user: another_user)
+    first_post = create(:post, user: user)
+    second_post = create(:post, :with_plan, user: user)
+    third_post = create(:post, :with_plan, user: another_user)
 
     visit user_posts_path(user)
 
-    expect(page).to have_text(post_1.title)
-    expect(page).to have_text(post_2.title)
+    expect(page).to have_text(first_post.title)
+    expect(page).to have_text(second_post.title)
 
-    expect(page).not_to have_text(post_3.title)
+    expect(page).not_to have_text(third_post.title)
   end
 
   scenario "Visitor can see free post" do

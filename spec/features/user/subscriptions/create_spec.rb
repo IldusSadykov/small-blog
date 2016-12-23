@@ -1,56 +1,51 @@
 require "rails_helper"
+require "stripe_mock"
 
 feature "Create new subscription", js: true do
   include_context "current user signed in"
 
-  let!(:post) { create :post, :published, plan: plan }
-  let!(:plan) { create :plan, stripe_id: stripe_plan.id }
+  let(:stripe_helper) { StripeMock.create_test_helper }
   let(:stripe_customer) do
-    double(
-      :stripe_customer,
-      id: "stripe_customer_id",
-      subscriptions: double(:subscriptions),
-      sources: double(:sources)
+    Stripe::Customer.create(
+      email: current_user.email,
+      source: stripe_helper.generate_card_token
     )
   end
-  let!(:stripe_subscription) do
-    result = JSON.parse(
-      File.read("spec/fixtures/stripe_subscription.json")
-    )
-    Stripe::StripeObject.construct_from(result)
-  end
-  let(:stripe_plan) { double :stripe_plan, id: stripe_subscription.plan.id }
-  let!(:stripe_card) do
-    result = JSON.parse(File.read("spec/fixtures/stripe_credit_card.json"))
-    Stripe::StripeObject.construct_from(result)
-  end
+  let(:post_title) { "post title" }
+  let(:post_body) { "post body" }
 
   before do
+    StripeMock.start
+
+    stripe_plan = stripe_helper.create_plan(id: "monthly", amount: 1500)
+
     current_user.update(stripe_customer_id: stripe_customer.id)
-    allow(Stripe::Plan).to receive(:retrieve).and_return(stripe_plan)
     allow(Stripe::Customer).to receive(:retrieve).with(current_user.stripe_customer_id).and_return(stripe_customer)
-    allow(stripe_customer.subscriptions).to receive(:create).and_return(stripe_subscription)
-    allow(stripe_customer.sources).to receive(:create).and_return(stripe_card)
-    allow(Stripe::Plan).to receive(:retrieve).and_return(stripe_plan)
+    allow(stripe_customer.sources).to receive(:create).and_return(stripe_customer.sources["data"].first)
+
+    plan = create :plan, name: "my plan", stripe_id: stripe_plan.id
+    create :post, title: post_title, body: post_body, plan: plan
 
     visit root_path
+
     click_button "Subscribe"
+
     wait_for_ajax
   end
 
-  scenario "I am in new subcription popup" do
-    within_frame "stripe_checkout_app" do
-      expect(page).to have_content plan.name
-    end
+  after { StripeMock.stop }
+
+  def subscribe_result_message
+    find("span.label", text: "Subscribed", wait: 5)
   end
 
-  scenario "I can pay stripe" do
+  scenario "Author can pay stripe" do
     pay_stripe
 
-    find("span.label", text: "Subscribed", wait: 30)
+    expect(subscribe_result_message).to have_content "Subscribed"
 
     expect(current_path).to eq post_path(Post.first.id)
-    expect(page).to have_content post.title
-    expect(page).to have_content post.body
+    expect(page).to have_content post_title
+    expect(page).to have_content post_body
   end
 end
