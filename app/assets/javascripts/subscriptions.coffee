@@ -13,7 +13,7 @@ class App.Components.DeleteSubscription
         type: "DELETE"
         dataType: "json"
         url: target.href
-        success: (response) =>
+        success: (response) ->
           target.parentNode.remove()
           alert(response.message)
 
