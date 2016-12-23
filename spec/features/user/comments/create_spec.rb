@@ -11,10 +11,9 @@ feature "Create comment to existing post", js: true do
   end
 
   scenario "User creates new comment with valid params" do
-
     click_button "New comment"
 
-    fill_form :comment, { message: "Test message" }
+    fill_form :comment, message: "Test message"
 
     click_on submit(:comment)
 

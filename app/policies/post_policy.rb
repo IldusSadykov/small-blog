@@ -11,7 +11,6 @@ class PostPolicy < ApplicationPolicy
     user && record.plan && !owner? && !record.subscribed?(user)
   end
 
-
   def edit?
     owner?
   end

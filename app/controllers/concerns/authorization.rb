@@ -9,7 +9,7 @@ module Authorization
   private
 
   def user_not_authorized
-    flash[:warning] =  "Not allowed to access to this resource, please subscribe"
+    flash[:warning] = "Not allowed to access to this resource, please subscribe"
     redirect_to(root_path)
   end
 end
