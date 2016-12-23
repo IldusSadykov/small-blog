@@ -12,7 +12,7 @@ feature "Author create new post" do
   end
 
   scenario "Author creates post with valid params" do
-    fill_form :post, attributes_for(:post).slice(:title, :body, :category)
+    fill_form :post, attributes_for(:post).slice(:title, :body)
 
     click_on submit(:post)
 
