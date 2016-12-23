@@ -39,13 +39,25 @@ feature "Create new subscription", js: true do
     find("span.label", text: "Subscribed", wait: 5)
   end
 
-  scenario "Author can pay stripe" do
-    pay_stripe
+  def card_error_popup
+    find(".Popover-content", wait: 5)
+  end
+
+  scenario "Author can pay stripe with valid card" do
+    pay_stripe("4242424242424242")
 
     expect(subscribe_result_message).to have_content "Subscribed"
 
     expect(current_path).to eq post_path(Post.first.id)
     expect(page).to have_content post_title
     expect(page).to have_content post_body
+  end
+
+  scenario "Author can't pay stripe with declined card" do
+    pay_stripe("4000000000000002")
+
+    within_frame "stripe_checkout_app" do
+      expect(card_error_popup).to have_content "This card was declined."
+    end
   end
 end
