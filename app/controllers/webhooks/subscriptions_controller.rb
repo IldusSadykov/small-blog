@@ -5,8 +5,7 @@ module Webhooks
 
     def create
       result = StripeSubscriptions::EventsProcessing.call(
-        event_type: event.type,
-        event_object: event.data.object
+        event: event
       )
 
       if result.success?

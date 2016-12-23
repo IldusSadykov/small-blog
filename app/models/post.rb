@@ -1,5 +1,5 @@
 class Post < ActiveRecord::Base
-  validates :title, :body, :category, :author, presence: true
+  validates :title, :body, :author, presence: true
 
   belongs_to :author, foreign_key: "user_id", class_name: "User"
   has_many :comments
