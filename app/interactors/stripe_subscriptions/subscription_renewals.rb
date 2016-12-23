@@ -5,7 +5,7 @@ module StripeSubscriptions
     delegate :event, to: :context
 
     def call
-      event.paid && subscription&.update(subscription_params)
+      event.data.object.paid && subscription&.update(subscription_params)
     end
 
     private
@@ -13,7 +13,7 @@ module StripeSubscriptions
     def subscription
       @subscription ||= SubscriptionFetch.call(
         stripe_sub_id: stripe_subscription.id,
-        stripe_customer_id: event.customer
+        stripe_customer_id: event.data.object.customer
       ).subscription
     end
 
@@ -28,7 +28,7 @@ module StripeSubscriptions
     end
 
     def stripe_subscription
-      event.lines.data[0]
+      event.data.object.lines.data.last
     end
 
     def builded_event

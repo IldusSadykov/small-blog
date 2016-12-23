@@ -12,6 +12,6 @@ FactoryGirl.define do
     status "active"
     trial_end nil
     trial_start nil
-    association :plan, factory: :plan
+    plan
   end
 end

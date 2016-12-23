@@ -22,7 +22,7 @@ feature "Show Posts" do
     expect(page).to have_text(post_body)
   end
 
-  scenario "Author can't see non free post" do
+  scenario "Author try to see non free post" do
     post = create(:post, :with_plan)
 
     visit post_path(post)
