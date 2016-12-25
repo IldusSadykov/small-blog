@@ -1,6 +1,8 @@
 class PlansController < ApplicationController
   respond_to :html
 
+  before_action :authenticate_user!
+
   expose_decorated(:plan, attributes: :plan_params)
   expose_decorated(:plans) { current_user.plans }
 
@@ -17,14 +19,17 @@ class PlansController < ApplicationController
   end
 
   def create
-    stripe_id = plan_params[:name]
-    plan.stripe_id = stripe_id
-    plan.save
-    Stripe::Plan.create(
-      plan_params.merge(id: stripe_id)
-        .except(:stripe_id, :user_id)
+    result = CreatePlan.call(
+      current_user: current_user,
+      plan: plan
     )
-    respond_with plan
+
+    if result.success?
+      respond_with plan
+    else
+      flash[:error] = result.error
+      respond_with plan
+    end
   end
 
   def edit
@@ -54,6 +59,6 @@ class PlansController < ApplicationController
         :currency,
         :amount,
         :interval
-      ).merge(user_id: current_user.id)
+      )
   end
 end

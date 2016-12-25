@@ -1,10 +1,10 @@
 .row
   .medium-8.columns
     h3
-      = link_to 'Add new plan', new_plan_path
+      = link_to "Add new plan", new_plan_path
 
 #content.row
   .large-12.columns
     - plans.each do |plan|
       = render plan
-      = render 'buttons', plan: plan
+      = render "buttons", plan: plan

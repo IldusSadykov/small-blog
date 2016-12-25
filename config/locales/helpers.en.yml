@@ -15,3 +15,8 @@ en:
 
       comment:
         create: "Create Comment"
+
+      plan:
+        create: "Create Plan"
+        edit: "Edit plan"
+        update: "Update Plan"

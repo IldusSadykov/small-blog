@@ -11,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    posts = PostsWithQuery.new(params[:query]).all
+    posts = Posts::SearchQuery.new(params[:query]).all
     respond_with posts, each_serializer: PostSerializer
 
     fresh_when(last_modified: posts.maximum(:updated_at))

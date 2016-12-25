@@ -3,8 +3,6 @@ require "rails_helper"
 feature "Author create new post" do
   include_context "current user signed in"
 
-  let!(:category) { create :category, name: "News" }
-
   before do
     visit user_posts_path(current_user)
 

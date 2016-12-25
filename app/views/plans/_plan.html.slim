@@ -3,6 +3,12 @@
     = link_to plan.name, plan_path(plan)
     '
     small = plan.created_at
+  p
+    ' Amount:
+    = plan.amount
+  p
+    ' Interval:
+    = plan.interval
   .callout
     ul.menu.simple
       li = plan.created_at

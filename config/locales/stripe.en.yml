@@ -2,3 +2,5 @@ en:
   stripe:
     payment:
       failed: "We're sorry, but something went wrong with Payment "
+    plan:
+      failed: "We're sorry, but something went wrong with Plan"
