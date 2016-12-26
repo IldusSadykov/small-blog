@@ -2,7 +2,7 @@ source "https://rubygems.org"
 
 ruby "2.3.1"
 
-gem "rails", "4.2.5.1"
+gem "rails", "4.2.7.1"
 gem "pg"
 
 # assets
@@ -36,7 +36,7 @@ gem "memory_profiler"
 gem "puma"
 gem "pundit"
 gem "rack-canonical-host"
-gem "rack-mini-profiler", require: false
+gem "rack-mini-profiler", ">= 0.10.1", require: false
 gem "responders"
 gem "rollbar", "~> 2.13.2"
 gem "seedbank"
@@ -45,6 +45,7 @@ gem "friendly_id", "~> 5.1.0"
 gem "active_model_serializers"
 gem "geocoder"
 gem "stripe"
+gem "rake", "< 11.0"
 
 group :staging, :production do
   gem "newrelic_rpm"
