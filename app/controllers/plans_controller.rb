@@ -24,12 +24,8 @@ class PlansController < ApplicationController
       plan: plan
     )
 
-    if result.success?
-      respond_with plan
-    else
-      flash[:error] = result.error
-      respond_with plan
-    end
+    flash[:error] = result.error if result.failure?
+    respond_with plan
   end
 
   def edit
@@ -38,12 +34,9 @@ class PlansController < ApplicationController
 
   def update
     result = UpdateStripePlan.call(plan: plan)
-    if result.success?
-      respond_with plan
-    else
-      flash[:error] = result.error
-      respond_with plan
-    end
+
+    flash[:error] = result.error if result.failure?
+    respond_with plan
   end
 
   def destroy

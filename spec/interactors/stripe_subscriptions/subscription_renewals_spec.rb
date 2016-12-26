@@ -23,10 +23,10 @@ describe StripeSubscriptions::SubscriptionRenewals do
 
     it "does update subscription" do
       current_period_start = Time.zone.at(stripe_subscription.period.start)
-      interactor
+      prev_period_start = subscription.current_period_start
 
-      subscription.reload
-      expect(subscription.current_period_start).to eq current_period_start
+      expect { interactor }.to change { subscription.reload.current_period_start }
+        .from(prev_period_start).to(current_period_start)
     end
   end
 end
