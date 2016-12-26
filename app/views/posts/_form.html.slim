@@ -3,6 +3,6 @@
     = f.input :title
     = f.input :body
     = f.association :category
-    = f.select :plan_id, options_for_select(current_user.plans_list)
+    = f.select :plan_id, options_for_select(current_user.plans_list), include_blank: "Select plan"
   .form-actions
     = f.button :submit

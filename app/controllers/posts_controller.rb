@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   respond_to :json, only: :index
 
   expose_decorated(:post, attributes: :post_params)
-  expose(:posts)
+  expose(:posts) { |defaults| defaults.includes(comments: :user) }
 
   expose(:categories) { Category.all }
 

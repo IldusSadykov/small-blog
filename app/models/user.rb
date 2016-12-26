@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   validates :full_name, presence: true
 
   belongs_to :location
-  has_many :posts, -> { includes :plan }
+  has_many :posts
   has_many :plans
   has_many :subscriptions, -> { includes(:plan).active }
   has_many :subscription_plans, through: :subscriptions, source: "plan"
