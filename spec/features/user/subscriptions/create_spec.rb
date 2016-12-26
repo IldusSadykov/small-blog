@@ -11,6 +11,7 @@ feature "Create new subscription", js: true do
       source: stripe_helper.generate_card_token
     )
   end
+  let(:post_subscribe_button) {}
   let(:post_title) { "post title" }
   let(:post_body) { "post body" }
 
@@ -24,11 +25,11 @@ feature "Create new subscription", js: true do
     allow(stripe_customer.sources).to receive(:create).and_return(stripe_customer.sources["data"].first)
 
     plan = create :plan, name: "my plan", stripe_id: stripe_plan.id
-    create :post, title: post_title, body: post_body, plan: plan
+    post = create :post, title: post_title, body: post_body, plan: plan
 
     visit root_path
 
-    click_button "Subscribe"
+    find(:id, "post_#{post.id}").find(:css, "button[type=submit]").click
 
     wait_for_ajax
   end
