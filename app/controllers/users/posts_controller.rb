@@ -3,7 +3,7 @@ module Users
     respond_to :html
 
     expose(:user)
-    expose_decorated(:posts) { fetch_posts }
+    expose_decorated(:posts) { fetch_posts.includes(:author, :plan) }
 
     def index
       respond_with posts
@@ -12,11 +12,7 @@ module Users
     private
 
     def fetch_posts
-      if params[:subscribed]
-        current_user.subscribed_posts
-      else
-        user.posts.includes(:author)
-      end
+      params[:subscribed] ? user.subscribed_posts : user.posts
     end
   end
 end
