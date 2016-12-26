@@ -36,7 +36,7 @@ feature "Create new subscription", js: true do
   after { StripeMock.stop }
 
   def subscribe_result_message
-    find("a.delete-subscription", text: "Unsubscribe", wait: 5)
+    find("a.delete-subscription", wait: 5)
   end
 
   def card_error_popup

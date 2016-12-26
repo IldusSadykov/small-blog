@@ -7,12 +7,8 @@ describe CreateSubscription do
 
   describe ".call" do
     let(:stripe_helper) { StripeMock.create_test_helper }
-
-    let!(:current_user) { create :user }
     let(:stripe_plan) { stripe_helper.create_plan(id: "monthly", amount: 1500) }
     let(:plan) { create :plan, name: "my plan", stripe_id: stripe_plan.id }
-    let!(:post) { create :post, title: "post title", body: "post body", plan: plan }
-
     let(:stripe_customer) do
       Stripe::Customer.create(
         email: current_user.email,
@@ -20,6 +16,8 @@ describe CreateSubscription do
       )
     end
 
+    let!(:post) { create :post, title: "post title", body: "post body", plan: plan }
+    let!(:current_user) { create :user }
     let!(:request_params) do
       {
         stripeToken: "stripeToken",

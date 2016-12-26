@@ -7,6 +7,7 @@ describe StripeSubscriptions::SubscriptionRenewals do
 
   describe ".call" do
     let(:event) { StripeMock.mock_webhook_event("invoice.payment_succeeded") }
+    let(:stripe_subscription) { event.data.object.lines.data.last }
     let!(:user) { create :user, stripe_customer_id: event.data.object.customer }
     let!(:subscription) do
       create(
@@ -17,8 +18,6 @@ describe StripeSubscriptions::SubscriptionRenewals do
         current_period_end: nil
       )
     end
-
-    let(:stripe_subscription) { event.data.object.lines.data.last }
 
     subject(:interactor) { described_class.call(event: event) }
 

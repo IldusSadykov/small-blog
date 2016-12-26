@@ -8,6 +8,8 @@ feature "Author create new plan" do
   let(:plan_name) { "Monthly plan" }
   let(:plan) { create :plan, name: plan_name, user: current_user, stripe_id: stripe_plan.id }
   let(:stripe_plan) { stripe_helper.create_plan(id: "monthly", amount: 1500) }
+  let(:new_name) { "Updated name" }
+  let(:new_amount) { "55" }
 
   before do
     StripeMock.start
@@ -24,13 +26,13 @@ feature "Author create new plan" do
     refill_form_and_submit
 
     expect(page).to have_text("Plan was successfully updated.")
-    expect(page).to have_text("Updated name")
-    expect(page).to have_text("55")
+    expect(page).to have_text(new_name)
+    expect(page).to have_text(new_amount)
   end
 
   def refill_form_and_submit
-    fill_in "Name", with: "Updated name"
-    fill_in "Amount", with: "55"
+    fill_in "Name", with: new_name
+    fill_in "Amount", with: new_amount
     click_on submit(:plan, :update)
   end
 end

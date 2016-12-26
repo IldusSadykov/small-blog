@@ -7,16 +7,14 @@ describe CustomerCreateCard do
 
   describe ".call" do
     let(:stripe_helper) { StripeMock.create_test_helper }
-
-    let!(:current_user) { create :user }
     let(:card_token) { stripe_helper.generate_card_token }
-
     let(:stripe_customer) do
       Stripe::Customer.create(
         email: current_user.email,
         source: card_token
       )
     end
+    let!(:current_user) { create :user }
 
     subject(:interactor) do
       described_class.call(
