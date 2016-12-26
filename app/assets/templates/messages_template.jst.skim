@@ -1,0 +1,3 @@
+div(aria-live="assertive" class="alert-box #{@type}" data-alert="" role="alertdialog" tabindex="0")
+  | #{@message}
+  button(aria-label="Close Alert" class="close" tabindex="0") ×

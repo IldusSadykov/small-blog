@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   respond_to :json, only: :index
 
   expose_decorated(:post, attributes: :post_params)
+  expose(:posts)
 
   expose(:categories) { Category.all }
 
@@ -11,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    posts = Posts::SearchQuery.new(params[:query]).all
+    self.posts = Posts::SearchQuery.new(params[:query]).all
     respond_with posts, each_serializer: PostSerializer
 
     fresh_when(last_modified: posts.maximum(:updated_at))

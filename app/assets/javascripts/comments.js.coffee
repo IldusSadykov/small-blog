@@ -58,5 +58,5 @@ class @Comments
       dataType: "json"
       url: target.href
       success: (response) ->
-        alert("Success delete comment!")
         target.parentNode.remove()
+        $(document).trigger("app:request:done", { message: response.message, type: "notice"} )

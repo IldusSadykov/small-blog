@@ -15,4 +15,10 @@ class App.Components.DeleteSubscription
         url: target.href
         success: (response) ->
           target.parentNode.remove()
-          alert(response.message)
+          $(document).trigger(
+            "app:request:done",
+            {
+              message: response.message,
+              type: "notice"
+            }
+          )

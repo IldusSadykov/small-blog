@@ -10,7 +10,7 @@ feature "Author create new plan" do
     StripeMock.start
     visit plans_path
 
-    click_link "Edit plan"
+    click_link "Add new plan"
   end
 
   after { StripeMock.stop }

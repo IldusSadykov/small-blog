@@ -23,14 +23,14 @@ class FetchCurrentLocation
 
   def fetched_default_location
     result = Geocoder.search(DEFAULT_CITY)
-    Location.new(location_params(result))
+    Location.new(location_params(result.first)) if result.first
   end
 
   def location_params(result)
     {
-      latitude: result.first.data["geometry"]["location"]["lat"],
-      longitude: result.first.data["geometry"]["location"]["lng"],
-      city: result.first.data["address_components"].first["long_name"]
+      latitude: result.data["geometry"]["location"]["lat"],
+      longitude: result.data["geometry"]["location"]["lng"],
+      city: result.data["address_components"].first["long_name"]
     }
   end
 end

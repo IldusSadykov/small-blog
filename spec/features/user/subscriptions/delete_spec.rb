@@ -29,7 +29,7 @@ feature "Create new subscription", js: true do
     stripe_subscription = stripe_customer.subscriptions.create(plan: stripe_plan.id)
     current_user.subscriptions.create(StripeSubscription.new(stripe_subscription).as_json)
 
-    visit subscribed_posts_path
+    visit user_posts_path(current_user, subscribed: true)
 
     wait_for_ajax
   end
@@ -39,8 +39,6 @@ feature "Create new subscription", js: true do
   scenario "Author can delete subscriptions" do
     click_link "Unsubscribe"
 
-    text = page.driver.browser.switch_to.alert.text
-
-    expect(text).to eq "Your subscription has been successfully deleted"
+    expect(alert_box_text("notice")).to have_content "Your subscription has been successfully deleted"
   end
 end

@@ -16,6 +16,7 @@ $ ->
   $(document).foundation()
 
   window.Comments = new Comments
+  window.FlashMessages = new App.Components.FlashMessages
 
   $searchInput = $(".search_users")
   $closeButton = $("button.close")

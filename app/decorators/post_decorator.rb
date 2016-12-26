@@ -19,7 +19,7 @@ class PostDecorator < ApplicationDecorator
     elsif PostPolicy.new(current_user, object).can_subscribe?
       h.form_tag(h.post_subscriptions_path(object), method: "POST") { show_subscription_button }
     elsif object.subscribed?(current_user)
-      h.content_tag :span, "Subscribed", class: "label"
+      h.link_to "Unsubscribe", h.post_subscriptions_path(post), class: "button alert delete-subscription"
     end
   end
 

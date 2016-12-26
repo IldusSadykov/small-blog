@@ -36,7 +36,7 @@ feature "Create new subscription", js: true do
   after { StripeMock.stop }
 
   def subscribe_result_message
-    find("span.label", text: "Subscribed", wait: 5)
+    find("a.delete-subscription", text: "Unsubscribe", wait: 5)
   end
 
   def card_error_popup
@@ -46,7 +46,7 @@ feature "Create new subscription", js: true do
   scenario "Author can pay stripe with valid card" do
     pay_stripe("4242424242424242")
 
-    expect(subscribe_result_message).to have_content "Subscribed"
+    expect(subscribe_result_message).to have_content "Unsubscribe"
 
     expect(current_path).to eq post_path(Post.first.id)
     expect(page).to have_content post_title

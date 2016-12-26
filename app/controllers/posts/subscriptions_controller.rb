@@ -11,5 +11,16 @@ module Posts
 
       redirect_to post_path(post)
     end
+
+    def destroy
+      authorize post, :subscribed?
+
+      result = DeleteSubscription.call(current_user: current_user, post: post)
+      if result.success?
+        render json: { message: "Your subscription has been successfully deleted" }, status: :ok, location: nil
+      else
+        render json: { error: result.error }, status: :unprocessible_entity, location: nil
+      end
+    end
   end
 end

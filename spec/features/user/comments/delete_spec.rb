@@ -14,7 +14,6 @@ feature "Delete comment to existing post", js: true do
   scenario "User delete comment" do
     click_link "Delete"
 
-    text = page.driver.browser.switch_to.alert.text
-    expect(text).to eq "Success delete comment!"
+    expect(alert_box_text("notice")).to have_content "Your comment has been successfully deleted"
   end
 end
