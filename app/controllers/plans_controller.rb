@@ -37,11 +37,13 @@ class PlansController < ApplicationController
   end
 
   def update
-    plan.save
-    stripe_plan = Stripe::Plan.retrieve(plan.stripe_id)
-    stripe_plan.name = plan.name
-    stripe_plan.save
-    respond_with plan
+    result = UpdateStripePlan.call(plan: plan)
+    if result.success?
+      respond_with plan
+    else
+      flash[:error] = result.error
+      respond_with plan
+    end
   end
 
   def destroy
