@@ -7,14 +7,14 @@ class App.Components.DeleteSubscription
   bindEvents: ->
     @el.on "click", (event) ->
       event.preventDefault()
-      target = event.currentTarget
+      target = $(event.currentTarget)
 
       $.ajax
         type: "DELETE"
         dataType: "json"
-        url: target.href
+        url: target.prop("href")
         success: (response) ->
-          target.parentNode.remove()
+          target.parent().remove()
           $(document).trigger(
             "app:request:done",
             {

@@ -24,8 +24,6 @@ class @Comments
       @createComment(event)
 
     @ui.deleteButton.on 'click', (event) =>
-      event.stopPropagation()
-      event.preventDefault()
       @deleteComment(event)
 
   createComment: ->
@@ -52,11 +50,13 @@ class @Comments
     @bindEvents()
 
   deleteComment: (event) ->
-    target = event.currentTarget
+    event.stopPropagation()
+    event.preventDefault()
+    target = $(event.currentTarget)
     $.ajax
       type: "DELETE"
       dataType: "json"
-      url: target.href
+      url: target.prop("href")
       success: (response) ->
-        target.parentNode.remove()
+        target.parent().remove()
         $(document).trigger("app:request:done", { message: response.message, type: "notice"} )
