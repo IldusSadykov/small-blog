@@ -9,9 +9,7 @@ module Posts
     end
 
     def all
-      Post
-        .where("body ilike :query or title ilike :query", query: "%#{query}%")
-        .limit(POST_COUNT)
+      Post.includes(author: :location).search_full_text(query).limit(POST_COUNT)
     end
   end
 end

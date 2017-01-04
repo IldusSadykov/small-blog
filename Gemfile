@@ -46,6 +46,7 @@ gem "active_model_serializers"
 gem "geocoder"
 gem "stripe"
 gem "rake", "< 11.0"
+gem "pg_search"
 
 group :staging, :production do
   gem "newrelic_rpm"
