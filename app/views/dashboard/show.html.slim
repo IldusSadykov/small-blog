@@ -13,8 +13,6 @@
     - dashboard.posts.each do |post|
       - cache post do
         = render 'users/posts/post', post: post
-      - if user_signed_in?
-        = render 'posts/buttons', post: post
 
 javascript:
   window.App.authors = #{{dashboard.authors.to_json}};

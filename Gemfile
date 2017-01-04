@@ -71,6 +71,7 @@ group :test do
   gem "shoulda-matchers", require: false
   gem "webmock", require: false
   gem "stripe-ruby-mock", "~> 2.3.1", require: "stripe_mock"
+  gem "poltergeist"
 end
 
 group :development, :test do

@@ -2,6 +2,5 @@
   p #{@message}
   h4
     small Commented by #{@user_name} in #{@created_at}
-  a.button.delete-comment.alert(href="#{@comment_path}" rel="nofollow" data-method="delete")
-    span Delete
+  a.button.delete-comment.alert(href="#{@comment_path}" rel="nofollow" data-method="delete") Delete
 hr

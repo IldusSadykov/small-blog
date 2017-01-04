@@ -8,5 +8,8 @@
   .callout
     ul.menu.simple
       li = link_to "Author: #{post.author.full_name}", "#"
-      li = link_to "Comments #{post.comments.count}", "#"
+      li = link_to "Comments #{post.comments_count}", "#"
+
+  - if user_signed_in?
+    = render "posts/buttons", post: post
 hr

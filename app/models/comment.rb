@@ -3,6 +3,6 @@ class Comment < ActiveRecord::Base
 
   scope :created_at_order_desc, -> { order("created_at desc") }
 
-  belongs_to :post
+  belongs_to :post, counter_cache: true
   belongs_to :user
 end
