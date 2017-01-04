@@ -3,7 +3,7 @@ class PostDecorator < ApplicationDecorator
 
   STRIPE_CHECKOUT_URL = "https://checkout.stripe.com/checkout.js".freeze
 
-  delegate :id, :title, :body, :author, :plan, :subscribed?
+  delegate :id, :title, :body, :author, :plan, :subscribed?, :comments_count
 
   def author_name
     object.author.full_name
