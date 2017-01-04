@@ -1,5 +1,7 @@
 module Webhooks
   class SubscriptionsController < ApplicationController
+    skip_before_action :verify_authenticity_token
+
     expose(:event) { Stripe::Event.retrieve(params[:id]) }
     respond_to :json
 
