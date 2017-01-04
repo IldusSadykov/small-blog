@@ -3,7 +3,7 @@ module Users
     respond_to :html
 
     expose(:user)
-    expose_decorated(:posts) { fetch_posts.includes(:author, :plan) }
+    expose_decorated(:posts) { fetch_posts.includes(:author) }
 
     def index
       respond_with posts
