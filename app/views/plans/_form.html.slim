@@ -1,7 +1,6 @@
 = simple_form_for plan.object do |f|
   .form-inputs
     = f.input :name
-    = f.select :currency, options_for_select([["United States Dollar", "USD"], ["Euro", "EUR"], ["Russian Ruble", "RUB"]])
     = f.input :amount
     = f.select :interval, options_for_select([["weekly", "week"], ["monthly", "month"], ["yearly", "year"]])
   .form-actions
