@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170104061048) do
+ActiveRecord::Schema.define(version: 20170105143307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,19 +78,19 @@ ActiveRecord::Schema.define(version: 20170104061048) do
   end
 
   create_table "plans", id: :uuid, default: "uuid_generate_v1()", force: :cascade do |t|
-    t.string   "stripe_id",            null: false
-    t.string   "name",                 null: false
-    t.integer  "amount",               null: false
+    t.string   "stripe_id",                            null: false
+    t.string   "name",                                 null: false
+    t.integer  "amount",                               null: false
     t.datetime "created"
-    t.string   "currency",             null: false
+    t.string   "currency",             default: "USD", null: false
     t.string   "interval"
     t.integer  "interval_count"
     t.boolean  "livemode"
     t.text     "statement_descriptor"
     t.integer  "trial_period_days"
     t.uuid     "user_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   add_index "plans", ["user_id"], name: "index_plans_on_user_id", using: :btree
