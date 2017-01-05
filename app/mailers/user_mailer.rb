@@ -5,7 +5,7 @@ class UserMailer < ActionMailer::Base
     mail(
       to: @user.email,
       from: "admin@example.com",
-      subject: "Payment failed!"
+      subject: "Your most recent invoice payment failed"
     )
   end
 end

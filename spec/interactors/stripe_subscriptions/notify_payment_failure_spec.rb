@@ -12,14 +12,12 @@ describe StripeSubscriptions::NotifyPaymentFailure do
 
     subject(:interactor) { described_class.call(event: event) }
 
-    before do
-      allow(UserMailer).to receive(:payment_failed).and_return(user_mailer)
-      allow(user_mailer).to receive(:deliver)
+    it "sends payment failed email to user" do
       interactor
-    end
+      open_email(user.email)
 
-    it "does update subscription" do
-      expect(UserMailer).to have_received(:payment_failed)
+      expect(current_email).to have_subject("Your most recent invoice payment failed")
+      expect(current_email).to have_body_text(user.full_name)
     end
   end
 end
