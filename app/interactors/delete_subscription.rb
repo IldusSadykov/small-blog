@@ -6,7 +6,7 @@ class DeleteSubscription
   def call
     @subscription ||= Stripe::Subscription.retrieve(user_subscription.stripe_id)
     if @subscription
-      @subscription.delete(at_period_end: true)
+      @subscription.delete
       user_subscription.update(subscription_params)
     else
       user_subscription.update(subscription_params)

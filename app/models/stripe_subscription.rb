@@ -49,6 +49,10 @@ class StripeSubscription < SimpleDelegator
     Time.zone.at(super) if super
   end
 
+  def canceled_at
+    Time.zone.at(super) if super
+  end
+
   def start
     Time.zone.at(super) if super
   end
