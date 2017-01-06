@@ -52,7 +52,7 @@ feature "Create new subscription", js: true do
     sleep 2
 
     expect(subscribe_result_message).to have_content "Unsubscribe"
-    expect(current_path).to eq post_path(Post.first.id)
+    expect(current_path).to eq user_posts_path(current_user)
     expect(page).to have_content post_title
     expect(page).to have_content post_body
   end

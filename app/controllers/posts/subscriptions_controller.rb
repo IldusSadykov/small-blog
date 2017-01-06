@@ -9,7 +9,7 @@ module Posts
         params: params
       )
 
-      redirect_to post_path(post)
+      redirect_to user_posts_path(current_user, subscribed: true)
     end
 
     def destroy

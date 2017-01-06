@@ -13,12 +13,12 @@ class PostDecorator < ApplicationDecorator
     object.comments.build
   end
 
-  def actions_block(current_user)
+  def actions_block(current_user, subscribed_page = false)
     if PostPolicy.new(current_user, object).edit?
       h.link_to "Edit post", h.edit_post_path(object), class: "button edit-button"
     elsif PostPolicy.new(current_user, object).can_subscribe?
       h.form_tag(h.post_subscriptions_path(object), method: "POST") { show_subscription_button }
-    elsif object.subscribed?(current_user)
+    elsif subscribed_page
       h.link_to "Unsubscribe", h.post_subscriptions_path(post), class: "button alert delete-subscription"
     end
   end
