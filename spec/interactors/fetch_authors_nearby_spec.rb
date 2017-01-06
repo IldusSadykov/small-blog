@@ -4,7 +4,14 @@ describe FetchAuthorsNearby do
   describe ".call" do
     let!(:users) { create_list :user, 10 }
 
-    subject(:interactor) { described_class.call(current_location: location) }
+    let(:parsed_location) do
+      {
+        longitude: location.longitude,
+        latitude: location.latitude,
+        city: location.city
+      }
+    end
+    subject(:interactor) { described_class.call(current_location: parsed_location) }
 
     context "when user exists in given location" do
       let(:location) { instance_double(Location, city: "Kazan", longitude: 49.122381, latitude: 55.790745) }

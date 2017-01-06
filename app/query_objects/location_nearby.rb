@@ -8,6 +8,6 @@ class LocationNearby
 
   def all
     return Location.none if location.blank?
-    Location.near([location.latitude, location.longitude], distance)
+    Location.near([location[:latitude], location[:longitude]], distance)
   end
 end
