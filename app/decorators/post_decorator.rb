@@ -15,7 +15,7 @@ class PostDecorator < ApplicationDecorator
 
   def actions_block(current_user, subscribed_page = false)
     if PostPolicy.new(current_user, object).edit?
-      h.link_to "Edit post", h.edit_post_path(object), class: "button edit-button"
+      h.content_tag :div, edit_button + delete_button, class: "buttons-group"
     elsif PostPolicy.new(current_user, object).can_subscribe?
       h.form_tag(h.post_subscriptions_path(object), method: "POST") { show_subscription_button }
     elsif subscribed_page
@@ -39,5 +39,24 @@ class PostDecorator < ApplicationDecorator
       key: ENV["PUBLISHABLE_KEY"],
       label: "Subscribe to #{object.plan&.name} $#{object.plan&.amount / 100}"
     }
+  end
+
+  private
+
+  def edit_button
+    h.link_to(
+      "Edit post",
+      h.edit_post_path(object),
+      class: "button edit-button"
+    )
+  end
+
+  def delete_button
+    h.link_to(
+      "Delete post",
+      h.post_path(object),
+      class: "button alert delete-button",
+      "data-method": :delete
+    )
   end
 end
